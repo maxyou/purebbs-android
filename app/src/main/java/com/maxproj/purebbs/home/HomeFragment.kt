@@ -11,7 +11,7 @@ import com.maxproj.purebbs.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment(){
     private val viewModel by lazy {
-        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(ViewModel::class.java)
+        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
