@@ -27,16 +27,13 @@
             android:background="#c7fca2"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <fragment
+            android:id="@+id/my_nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#cf9ee9"
-            android:orientation="vertical">
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation" />
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
 
