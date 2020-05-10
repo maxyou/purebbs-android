@@ -24,7 +24,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#67ec92"
+            android:background="#c7fca2"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
