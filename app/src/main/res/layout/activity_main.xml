@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     tools:context=".MainActivity">
 
     <com.google.android.material.navigation.NavigationView
@@ -14,7 +15,7 @@
         app:menu="@menu/nav_drawer_menu" />
 
     <LinearLayout
-        android:id="@+id/upper"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#aabb90"
@@ -28,7 +29,7 @@
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <fragment
-            android:id="@+id/my_nav_host_fragment"
+            android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
