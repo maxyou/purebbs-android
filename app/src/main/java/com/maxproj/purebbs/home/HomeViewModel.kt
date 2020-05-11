@@ -5,6 +5,8 @@ import androidx.navigation.Navigation
 
 class HomeViewModel : ViewModel() {
 
+    var postAdapter: PostAdapter = PostAdapter()
+
     fun gotoDetail(view: View){
 
         Navigation.findNavController(view).navigate(HomeFragmentDirections.actionHomeDestToDetailDest())
