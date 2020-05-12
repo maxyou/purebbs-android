@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.R
 import com.maxproj.purebbs.database.PostBrief
+import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 class PostAdapter : RecyclerView.Adapter<PostBriefItemViewHolder>() {
     var data =  listOf<PostBrief>()
@@ -31,11 +32,13 @@ class PostAdapter : RecyclerView.Adapter<PostBriefItemViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
+        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context))
+
         Log.d("PureBBS", "adapter onCreateViewHolder")
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater
-            .inflate(R.layout.post_item_view, parent, false)// as TextView
-        return PostBriefItemViewHolder(view)
+//        val layoutInflater = LayoutInflater.from(parent.context)
+//        val view = layoutInflater
+//            .inflate(R.layout.post_item_view, parent, false)// as TextView
+        return PostBriefItemViewHolder(binding.root)
     }
 }
 

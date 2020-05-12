@@ -37,7 +37,7 @@ fun mockPostData():List<PostBrief>{
     var data =  mutableListOf<PostBrief>()
 
     (0..20).forEach {
-        data.add(it, PostBrief(it, "user $it", "title $it"))
+        data.add(it, PostBrief(it, "user: $it", "title $it"))
         Log.d("PureBBS", "mock post data: $it")
     }
 
