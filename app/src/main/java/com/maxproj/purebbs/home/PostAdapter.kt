@@ -11,6 +11,9 @@ import com.maxproj.purebbs.database.PostBrief
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
+
+    lateinit var viewModel: HomeViewModel
+
     var data =  listOf<PostBrief>()
         set(value) {
             Log.d("PureBBS", "adapter post data: $value")
@@ -26,7 +29,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     override fun onBindViewHolder(holder: PostBriefItemViewHolder, position: Int) {
         val item = data[position]
         Log.d("PureBBS", "adapter onBindViewHolder item: $item")
-        holder.bind(item)
+        holder.bind(item, viewModel)
 //        holder.user.text = item.user
 //        holder.title.text = item.postTitle
         Log.d("PureBBS", "adapter onBindViewHolder: $position")
@@ -44,16 +47,10 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     class PostBriefItemViewHolder(val binding: PostItemViewBinding ): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item:PostBrief){
+        fun bind(item:PostBrief, viewModel:HomeViewModel){
+            binding.viewModel = viewModel
             binding.item = item
-        }
-
-//        var user:TextView
-//    var title:TextView
-
-        init {
-//            user = view.findViewById(R.id.user)
-//        title = view.findViewById(R.id.title)
+            binding.executePendingBindings() //
         }
     }
 }

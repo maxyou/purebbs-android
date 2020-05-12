@@ -23,8 +23,9 @@ class HomeFragment : Fragment(){
         setHasOptionsMenu(true)
 
         val binding: HomeFragmentBinding = HomeFragmentBinding.inflate(layoutInflater)
-        binding.viewmodel = viewModel
+        binding.viewModel = viewModel
         viewModel.postAdapter.data = mockPostData()
+        viewModel.postAdapter.viewModel = viewModel
         binding.homeRecyclerview.adapter = viewModel.postAdapter
 
         return binding.root
@@ -37,7 +38,7 @@ fun mockPostData():List<PostBrief>{
     var data =  mutableListOf<PostBrief>()
 
     (0..20).forEach {
-        data.add(it, PostBrief(it, "user: $it", "title $it"))
+        data.add(it, PostBrief(it, "user: $it", "title $it", "category"))
         Log.d("PureBBS", "mock post data: $it")
     }
 

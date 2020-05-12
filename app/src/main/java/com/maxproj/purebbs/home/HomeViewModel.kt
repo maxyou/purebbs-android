@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
 
-    var itemFlag:String = "not used"
+    var category:String = "not used"
 
     var postAdapter: PostAdapter = PostAdapter()
 

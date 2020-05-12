@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.maxproj.purebbs.home.HomeViewModel" />
     </data>
 
@@ -27,7 +27,7 @@
 
 <!--        <TextView-->
 <!--            android:text="@string/abc"-->
-<!--            android:onClick="@{(view)->viewmodel.gotoDetail(view)}"-->
+<!--            android:onClick="@{(view)->viewModel.gotoDetail(view)}"-->
 <!--            app:layout_constraintBottom_toBottomOf="parent"-->
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            app:layout_constraintEnd_toEndOf="parent"-->

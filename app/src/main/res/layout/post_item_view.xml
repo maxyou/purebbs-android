@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.maxproj.purebbs.home.HomeViewModel" />
         <variable
             name="item"
@@ -25,7 +25,7 @@
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@color/Turquoise"
-            android:text="this is user"
+            android:text="@{item.user}"
             android:textColor="@color/Magenta"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/post_item"
@@ -44,6 +44,17 @@
             app:layout_constraintBottom_toBottomOf="@id/post_item"
             app:layout_constraintEnd_toEndOf="@id/post_item"
             app:layout_constraintStart_toEndOf="@id/user"
+            app:layout_constraintTop_toTopOf="@id/post_item" />
+        <TextView
+            android:id="@+id/category"
+            android:background="@color/LightGreen"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:text="@{viewModel.category}"
+            app:layout_constraintBottom_toBottomOf="@id/post_item"
+            app:layout_constraintEnd_toEndOf="@id/post_item"
+            app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintTop_toTopOf="@id/post_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
