@@ -7,6 +7,9 @@
         <variable
             name="viewmodel"
             type="com.maxproj.purebbs.home.HomeViewModel" />
+        <variable
+            name="item"
+            type="com.maxproj.purebbs.database.PostBrief" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +40,7 @@
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:text="@{viewmodel.itemFlag}"
+            android:text="@{item.postTitle}"
             app:layout_constraintBottom_toBottomOf="@id/post_item"
             app:layout_constraintEnd_toEndOf="@id/post_item"
             app:layout_constraintStart_toEndOf="@id/user"
