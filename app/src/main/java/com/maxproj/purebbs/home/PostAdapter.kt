@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.R
 import com.maxproj.purebbs.database.PostBrief
@@ -13,6 +14,7 @@ import com.maxproj.purebbs.databinding.PostItemViewBinding
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
 
     lateinit var viewModel: HomeViewModel
+    lateinit var lifecycleOwner: LifecycleOwner
 
     var data =  listOf<PostBrief>()
         set(value) {
@@ -37,6 +39,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
         val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.lifecycleOwner = lifecycleOwner
 
         Log.d("PureBBS", "adapter onCreateViewHolder")
 //        val layoutInflater = LayoutInflater.from(parent.context)

@@ -27,6 +27,7 @@ class HomeFragment : Fragment(){
         binding.viewModel = viewModel
         viewModel.postAdapter.data = mockPostData()
         viewModel.postAdapter.viewModel = viewModel
+        viewModel.postAdapter.lifecycleOwner = this
         binding.homeRecyclerview.adapter = viewModel.postAdapter
 
         return binding.root
