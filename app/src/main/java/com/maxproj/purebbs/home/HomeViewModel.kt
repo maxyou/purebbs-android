@@ -9,13 +9,13 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
 
-    private var _replyNum = MutableLiveData<Int?>(0)
-    val replyNum:LiveData<Int?>
-        get() = _replyNum
+    private val _replyNum = MutableLiveData<Int>(0)
+    val replyNum:LiveData<Int> = _replyNum
 
     fun onClickIncReplyNum(){
         Log.d("PureBBS", "onClickIncReplyNum")
-        _replyNum.value = _replyNum.value?.plus(1)
+        _replyNum.value = (_replyNum.value ?: 0) + 1
+//        _replyNum.setValue(_replyNum.value!! + 1)
         println(_replyNum.value.toString())
     }
 

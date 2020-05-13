@@ -23,6 +23,7 @@ class HomeFragment : Fragment(){
         setHasOptionsMenu(true)
 
         val binding: HomeFragmentBinding = HomeFragmentBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.postAdapter.data = mockPostData()
         viewModel.postAdapter.viewModel = viewModel
