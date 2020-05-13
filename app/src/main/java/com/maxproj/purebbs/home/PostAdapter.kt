@@ -36,7 +36,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
-        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         Log.d("PureBBS", "adapter onCreateViewHolder")
 //        val layoutInflater = LayoutInflater.from(parent.context)
