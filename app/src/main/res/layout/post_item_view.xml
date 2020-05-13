@@ -56,8 +56,35 @@
             android:text="@{viewModel.category}"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/reply"
             app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/reply"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="2dp"
+            android:background="@color/Coral"
+            android:gravity="center"
+            android:text="@{viewModel.replyNum.toString()}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/addReply"
+            app:layout_constraintStart_toEndOf="@id/category"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/addReply"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="2dp"
+            android:background="@color/Coral"
+            android:gravity="center"
+            android:text="@{viewModel.replyNum.toString()}"
+            android:textSize="12sp"
+            android:onClick="@{()->viewModel.onClickIncReplyNum()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/reply"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
