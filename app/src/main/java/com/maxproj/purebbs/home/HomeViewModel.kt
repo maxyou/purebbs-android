@@ -40,12 +40,13 @@ class HomeViewModel : ViewModel() {
 //        var repos = HttpService.api().getPostByPaginate(0, 20)
 //        var repos = HttpService.api().getPostByPaginate(0,20 )
 //        var repos = HttpService.api().getV2exHot()
-        var repos = HttpService.api().getHotTopics(1,"ask",20,false)
+        var repos = HttpService.api().getExpressJson()
+//        var repos = HttpService.api().getHotTopics(0, "ask", 10, false)
 
         Log.d("PureBBS", repos.toString())
 
-        repos?.enqueue(object: Callback<HttpData.CnNodeTopics> {
-            override fun onResponse(call: Call<HttpData.CnNodeTopics>, response: Response<HttpData.CnNodeTopics>){
+        repos?.enqueue(object: Callback<HttpData.ExpressJson> {
+            override fun onResponse(call: Call<HttpData.ExpressJson>, response: Response<HttpData.ExpressJson>){
                 Log.d("PureBBS", "onResponse=======================")
                 Log.d("PureBBS", response.body().toString())
                 Log.d("PureBBS", response.toString())
@@ -54,7 +55,7 @@ class HomeViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<HttpData.CnNodeTopics>, t: Throwable) {
+            override fun onFailure(call: Call<HttpData.ExpressJson>, t: Throwable) {
                 Log.d("PureBBS", "t.localizedMessage=======================")
                 Log.d("PureBBS", t.toString())
                 Log.d("PureBBS", t.localizedMessage.toString())

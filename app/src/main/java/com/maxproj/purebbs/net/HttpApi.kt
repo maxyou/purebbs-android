@@ -50,4 +50,8 @@ interface HttpApi {
         @Query("limit") limit: Int,
         @Query("mdrender") mdrender: Boolean
     ): Call<HttpData.CnNodeTopics>
+
+    @GET("json")
+    fun getExpressJson(): Call<HttpData.ExpressJson>?
+
 }

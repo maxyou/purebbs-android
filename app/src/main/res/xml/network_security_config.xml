@@ -2,7 +2,12 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">purebbs.com:3001</domain>
-        <domain includeSubdomains="true">192.168.31.70:3001</domain>
+        <domain includeSubdomains="true">192.168.31.70</domain>
+<!--        <domain includeSubdomains="true">192.168.31.70:3000</domain>-->
         <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">10.0.0.2</domain>
+        <domain includeSubdomains="true">10.0.2.3</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
     </domain-config>
 </network-security-config>

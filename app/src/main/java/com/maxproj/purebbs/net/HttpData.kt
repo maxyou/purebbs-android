@@ -3,6 +3,9 @@ package com.maxproj.purebbs.net
 import com.google.gson.annotations.SerializedName
 
 class HttpData {
+
+    data class ExpressJson(val msg:String)
+
     data class PostListRet(val code:Int, val message:String, val data:List<String>, val totalDocs:Int)
 
     data class CnNodeTopics(
