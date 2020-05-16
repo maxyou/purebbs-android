@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+//import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 
 import java.io.IOException
 
@@ -18,8 +18,8 @@ object HttpService {
                 var request = chain.request()
                 request = request.newBuilder()
 //                    .addHeader("Authorization", "Bearer " + "usr_token")
-                    .addHeader("Connection","close")
-                    .addHeader("content-type", "application/json")
+//                    .addHeader("Connection","close")
+//                    .addHeader("content-type", "application/json")
                     .build()
                 return chain.proceed(request)
             }
@@ -31,15 +31,9 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-//            .baseUrl("http://localhost:3001/")
-//            .baseUrl("https://www.v2ex.com/")
-//            .baseUrl("http://localhost:3000/")
-//            .baseUrl("https://cnodejs.org/")
             .baseUrl("http://192.168.31.70:3000/")
-//            .baseUrl("http://127.0.0.1:3000/")
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()
     }
     fun api(): HttpApi {
