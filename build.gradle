@@ -11,6 +11,7 @@ buildscript {
         nav_version = '2.3.0-alpha01'
         constraintLayoutVersion = '2.0.0-beta4'
         junitVersion = "4.12"
+        roomVersion = '2.2.5'
     }
     repositories {
         google()

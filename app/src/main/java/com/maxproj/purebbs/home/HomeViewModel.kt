@@ -1,9 +1,8 @@
 package com.maxproj.purebbs.home
+import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import androidx.navigation.Navigation
 import com.maxproj.purebbs.net.HttpData
 import com.maxproj.purebbs.net.HttpService
@@ -12,10 +11,22 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
+
+    private var homeRepository:HomeRepository
 
     private val _replyNum = MutableLiveData<Int>(0)
     val replyNum:LiveData<Int> = _replyNum
+
+    init {
+        if(application == null){
+            println("application==null in ViewModel")
+        }else{
+            println("application!=null in ViewModel")
+        }
+        val homeDao = HomeRoomDatabase.getDatabase(application, viewModelScope).homeDao()
+        homeRepository = HomeRepository(homeDao)
+    }
 
     fun onClickIncReplyNum(){
         Log.d("PureBBS", "onClickIncReplyNum")
@@ -33,6 +44,10 @@ class HomeViewModel : ViewModel() {
     }
     fun gotoDetail(view: View){
         Navigation.findNavController(view).navigate(HomeFragmentDirections.actionHomeDestToDetailDest())
+    }
+
+    fun refresh(){
+
     }
 
     fun tryHttp(){

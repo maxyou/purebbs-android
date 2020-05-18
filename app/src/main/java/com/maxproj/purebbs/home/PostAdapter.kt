@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.R
-import com.maxproj.purebbs.database.PostBrief
+import com.maxproj.purebbs.home.PostBrief
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
@@ -50,7 +50,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     class PostBriefItemViewHolder(val binding: PostItemViewBinding ): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item:PostBrief, viewModel:HomeViewModel){
+        fun bind(item: PostBrief, viewModel:HomeViewModel){
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //

@@ -10,7 +10,7 @@
 
         <variable
             name="item"
-            type="com.maxproj.purebbs.database.PostBrief" />
+            type="com.maxproj.purebbs.home.PostBrief" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

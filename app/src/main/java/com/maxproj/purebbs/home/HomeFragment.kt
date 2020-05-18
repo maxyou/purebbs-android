@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.maxproj.purebbs.database.PostBrief
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.maxproj.purebbs.home.PostBrief
 import com.maxproj.purebbs.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment(){
     private val viewModel by lazy {
-        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+//        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+        var activity = activity as AppCompatActivity
+        ViewModelProvider(activity, HomeViewModelFactory(activity.application)).get(HomeViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,10 +44,19 @@ fun mockPostData():List<PostBrief>{
     var data =  mutableListOf<PostBrief>()
 
     (0..20).forEach {
-        data.add(it, PostBrief(it, "user: $it", "title $it", "category"))
+        data.add(it,
+            PostBrief(
+                it,
+                "user: $it",
+                "title $it",
+                "category",
+                "2020-0519-0510-01-001"
+            )
+        )
         Log.d("PureBBS", "mock post data: $it")
     }
 
     println(data)
     return data
 }
+

@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 class HttpData {
 
+    data class User (
+        var name:String,
+        var tel:String
+    )
     data class ExpressJson(val msg:String)
 
     data class PostListRet(val code:Int, val message:String, val data:List<String>, val totalDocs:Int)

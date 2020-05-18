@@ -54,4 +54,9 @@ interface HttpApi {
     @GET("json")
     fun getExpressJson(): Call<HttpData.ExpressJson>?
 
+    @GET("userId")
+    fun getUserById(
+        @Query("userId") tab: String
+    ): Call<HttpData.User>
+
 }
