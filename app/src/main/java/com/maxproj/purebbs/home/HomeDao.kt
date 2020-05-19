@@ -8,6 +8,15 @@ import androidx.room.Query
 
 @Dao
 interface HomeDao {
+    @Query("SELECT * from server_info_table ORDER BY info ASC")
+    fun getServerInfo(): LiveData<List<ServerInfo>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertServerInfo(serverInfo: ServerInfo)
+
+    @Query("DELETE FROM server_info_table")
+    suspend fun deleteAllServerInfo()
+
     @Query("SELECT * from post_table ORDER BY createTime ASC")
     fun getAlphabetizedWords(): LiveData<List<PostBrief>>
 

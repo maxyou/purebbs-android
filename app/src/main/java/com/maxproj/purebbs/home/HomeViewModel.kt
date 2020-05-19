@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
+import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
 import com.maxproj.purebbs.net.HttpService
 import retrofit2.Call
@@ -11,22 +12,18 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class HomeViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
     private var homeRepository:HomeRepository
+    val serverInfo:LiveData<List<ServerInfo>>
+    init {
+        val homeDao = HomeRoomDatabase.getDatabase(application, viewModelScope).homeDao()
+        homeRepository = HomeRepository(viewModelScope, homeDao, httpApi)
+        serverInfo = homeRepository.serverInfo
+    }
 
     private val _replyNum = MutableLiveData<Int>(0)
     val replyNum:LiveData<Int> = _replyNum
-
-    init {
-        if(application == null){
-            println("application==null in ViewModel")
-        }else{
-            println("application!=null in ViewModel")
-        }
-        val homeDao = HomeRoomDatabase.getDatabase(application, viewModelScope).homeDao()
-        homeRepository = HomeRepository(homeDao)
-    }
 
     fun onClickIncReplyNum(){
         Log.d("PureBBS", "onClickIncReplyNum")
@@ -47,36 +44,31 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun refresh(){
-
+        homeRepository.serverInfoUpdate()
     }
 
-    fun tryHttp(){
-
-//        var repos = HttpService.api().getPostByPaginate(0, 20)
-//        var repos = HttpService.api().getPostByPaginate(0,20 )
-//        var repos = HttpService.api().getV2exHot()
-        var repos = HttpService.api().getExpressJson()
-//        var repos = HttpService.api().getHotTopics(0, "ask", 10, false)
-
-        Log.d("PureBBS", repos.toString())
-
-        repos?.enqueue(object: Callback<HttpData.ExpressJson> {
-            override fun onResponse(call: Call<HttpData.ExpressJson>, response: Response<HttpData.ExpressJson>){
-                Log.d("PureBBS", "onResponse=======================")
-                Log.d("PureBBS", response.body().toString())
-                Log.d("PureBBS", response.toString())
-                if(response.isSuccessful){
-
-                }
-            }
-
-            override fun onFailure(call: Call<HttpData.ExpressJson>, t: Throwable) {
-                Log.d("PureBBS", "t.localizedMessage=======================")
-                Log.d("PureBBS", t.toString())
-                Log.d("PureBBS", t.localizedMessage.toString())
-            }
-        })
-
-    }
+//    fun tryHttp(){
+//        var repos = HttpService.api().getExpressJson()
+//
+//        Log.d("PureBBS", repos.toString())
+//
+//        repos?.enqueue(object: Callback<HttpData.ExpressJson> {
+//            override fun onResponse(call: Call<HttpData.ExpressJson>, response: Response<HttpData.ExpressJson>){
+//                Log.d("PureBBS", "onResponse=======================")
+//                Log.d("PureBBS", response.body().toString())
+//                Log.d("PureBBS", response.toString())
+//                if(response.isSuccessful){
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<HttpData.ExpressJson>, t: Throwable) {
+//                Log.d("PureBBS", "t.localizedMessage=======================")
+//                Log.d("PureBBS", t.toString())
+//                Log.d("PureBBS", t.localizedMessage.toString())
+//            }
+//        })
+//
+//    }
 
 }

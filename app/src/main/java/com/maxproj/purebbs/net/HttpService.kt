@@ -11,7 +11,9 @@ import java.io.IOException
 
 object HttpService {
 
-    fun getRetrofit(): Retrofit {
+    val baseUrl:String = "http://192.168.31.70:3000"
+
+    private fun getRetrofit(): Retrofit {
         val interceptor: Interceptor = object : Interceptor {
             @Throws(IOException::class)
             override fun intercept(chain: Interceptor.Chain): Response {
@@ -31,7 +33,7 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://192.168.31.70:3000/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

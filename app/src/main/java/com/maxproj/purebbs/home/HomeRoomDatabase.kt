@@ -9,7 +9,7 @@ import com.maxproj.purebbs.home.PostBrief
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PostBrief::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class, ServerInfo::class), version = 1, exportSchema = false)
 abstract class HomeRoomDatabase : RoomDatabase(){
 
     abstract fun homeDao(): HomeDao
@@ -47,6 +47,7 @@ abstract class HomeRoomDatabase : RoomDatabase(){
             INSTANCE?.let { database ->
                 scope.launch {
                     var homeDao = database.homeDao()
+
                     homeDao.deleteAll()// Delete all content here.
                     // Add sample words.
                     var postBrief = PostBrief(
@@ -57,6 +58,18 @@ abstract class HomeRoomDatabase : RoomDatabase(){
                         "2020-0519-0509-01-001"
                     )
                     homeDao.insert(postBrief)
+
+                    homeDao.deleteAllServerInfo()// Delete all content here.
+                    // Add sample words.
+                    (0..5).forEach {
+
+                        var serverInfo = ServerInfo(
+                            it,
+                            "Alex $it"
+                        )
+                        homeDao.insertServerInfo(serverInfo)
+                    }
+
                 }
             }
         }
