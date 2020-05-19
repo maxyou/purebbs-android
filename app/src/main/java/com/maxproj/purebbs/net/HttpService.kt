@@ -20,8 +20,8 @@ object HttpService {
                 var request = chain.request()
                 request = request.newBuilder()
 //                    .addHeader("Authorization", "Bearer " + "usr_token")
-//                    .addHeader("Connection","close")
-//                    .addHeader("content-type", "application/json")
+                    .addHeader("Connection","close")
+                    .addHeader("content-type", "application/json")
                     .build()
                 return chain.proceed(request)
             }
@@ -33,7 +33,7 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(baseUrl)
+            .baseUrl("http://192.168.31.70:3000")
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

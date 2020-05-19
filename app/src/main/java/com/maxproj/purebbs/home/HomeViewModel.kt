@@ -47,28 +47,5 @@ class HomeViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         homeRepository.serverInfoUpdate()
     }
 
-//    fun tryHttp(){
-//        var repos = HttpService.api().getExpressJson()
-//
-//        Log.d("PureBBS", repos.toString())
-//
-//        repos?.enqueue(object: Callback<HttpData.ExpressJson> {
-//            override fun onResponse(call: Call<HttpData.ExpressJson>, response: Response<HttpData.ExpressJson>){
-//                Log.d("PureBBS", "onResponse=======================")
-//                Log.d("PureBBS", response.body().toString())
-//                Log.d("PureBBS", response.toString())
-//                if(response.isSuccessful){
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<HttpData.ExpressJson>, t: Throwable) {
-//                Log.d("PureBBS", "t.localizedMessage=======================")
-//                Log.d("PureBBS", t.toString())
-//                Log.d("PureBBS", t.localizedMessage.toString())
-//            }
-//        })
-//
-//    }
 
 }
