@@ -44,7 +44,8 @@ class HomeViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
     }
 
     fun refresh(){
-        homeRepository.serverInfoUpdate()
+//        homeRepository.serverInfoUpdate()
+        homeRepository.getJsonUserById("abc")
     }
 
 

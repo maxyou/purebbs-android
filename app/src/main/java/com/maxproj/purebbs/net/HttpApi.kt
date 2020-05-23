@@ -59,4 +59,9 @@ interface HttpApi {
         @Query("userId") tab: String
     ): Call<HttpData.User>
 
+    @GET("jsonUserId")
+    suspend fun getJsonUserById(
+        @Query("jsonUserId") tab: String
+    ): HttpData.User
+
 }

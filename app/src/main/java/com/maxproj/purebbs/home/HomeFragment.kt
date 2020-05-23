@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.maxproj.purebbs.home.PostBrief
 import com.maxproj.purebbs.databinding.HomeFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
@@ -18,7 +15,8 @@ class HomeFragment : Fragment(){
     private val viewModel by lazy {
 //        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
         var activity = activity as AppCompatActivity
-        ViewModelProvider(activity, HomeViewModelFactory(activity.application, HttpService.api())).get(HomeViewModel::class.java)
+//        ViewModelProvider(activity, HomeViewModelFactory(activity.application, HttpService.api())).get(HomeViewModel::class.java)
+        ViewModelProvider(activity, HomeViewModelFactory(activity.application, HttpService.api)).get(HomeViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,

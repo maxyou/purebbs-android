@@ -33,7 +33,7 @@ class HomeRepository(
 //            num++
 //        }
 
-        getUser(num.toString())
+//        getUser(num.toString())
 //        tryHttp()
     }
 
@@ -82,19 +82,7 @@ class HomeRepository(
                 data.value = response.body()
                 Log.d("PureBBS", "getUser return ${data.value}")
 
-                viewModelScope.launch(Dispatchers.IO) {
-
-                    Log.d("PureBBS", "viewModelScope call homeDao ${data.value}")
-
-                    homeDao.deleteAllServerInfo()// Delete all content here.
-                    // Add sample words.
-                    var serverInfo = ServerInfo(
-                        num,
-                        data.value?.name.toString()
-                    )
-                    homeDao.insertServerInfo(serverInfo)
-                    num++
-                }
+                updateByHomeDao(data)
 
             }
 
@@ -106,6 +94,43 @@ class HomeRepository(
         return data
     }
 
+    private fun updateByHomeDao(data: MutableLiveData<HttpData.User>) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            Log.d("PureBBS", "viewModelScope call homeDao ${data.value}")
+
+            homeDao.deleteAllServerInfo()// Delete all content here.
+            // Add sample words.
+            var serverInfo = ServerInfo(
+                num,
+                data.value?.name.toString()
+            )
+            homeDao.insertServerInfo(serverInfo)
+            num++
+        }
+    }
+
+
+    fun getJsonUserById(id: String){
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val data = httpApi.getJsonUserById(id)
+
+            Log.d("PureBBS", "getJsonUserById -------- viewModelScope call homeDao ${data}")
+
+            homeDao.deleteAllServerInfo()// Delete all content here.
+            // Add sample words.
+            var serverInfo = ServerInfo(
+                num,
+                data?.name.toString()
+            )
+            homeDao.insertServerInfo(serverInfo)
+            num++
+        }
+
+
+    }
 
 //    fun tryHttp(){
 //        var repos = HttpService.api().getExpressJson()
