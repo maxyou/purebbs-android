@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.net
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -63,5 +64,10 @@ interface HttpApi {
     suspend fun getJsonUserById(
         @Query("jsonUserId") tab: String
     ): HttpData.User
+    @GET("jsonUserId")
+
+    suspend fun getJsonUserByIdR(
+        @Query("jsonUserId") tab: String
+    ): Response<HttpData.User>
 
 }
