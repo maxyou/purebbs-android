@@ -1,4 +1,4 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface HomeDao {
+interface PostDao {
     @Query("SELECT * from server_info_table ORDER BY info ASC")
     fun getServerInfo(): LiveData<List<ServerInfo>>
 

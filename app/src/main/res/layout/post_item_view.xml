@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.maxproj.purebbs.home.HomeViewModel" />
+            type="com.maxproj.purebbs.post.PostViewModel" />
 
         <variable
             name="item"
-            type="com.maxproj.purebbs.home.PostBrief" />
+            type="com.maxproj.purebbs.post.PostBrief" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

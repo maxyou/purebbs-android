@@ -1,4 +1,4 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

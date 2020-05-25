@@ -1,10 +1,9 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 
 import android.util.Log
 import androidx.lifecycle.*
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
-import com.maxproj.purebbs.net.HttpService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,24 +11,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeRepository(
+class PostRepository(
     private val viewModelScope: CoroutineScope,
-    private val homeDao: HomeDao,
+    private val postDao: PostDao,
     private val httpApi: HttpApi
 ) {
 
-    val serverInfo: LiveData<List<ServerInfo>> = homeDao.getServerInfo()
+    val serverInfo: LiveData<List<ServerInfo>> = postDao.getServerInfo()
     var num: Int = 1
     fun serverInfoUpdate() {
         Log.d("PureBBS", "serverInfoUpdate()")
 //        viewModelScope.launch(Dispatchers.IO) {
-//            homeDao.deleteAllServerInfo()// Delete all content here.
+//            postDao.deleteAllServerInfo()// Delete all content here.
 //            // Add sample words.
 //            var serverInfo = ServerInfo(
 //                num,
 //                "Alex $num"
 //            )
-//            homeDao.insertServerInfo(serverInfo)
+//            postDao.insertServerInfo(serverInfo)
 //            num++
 //        }
 
@@ -82,7 +81,7 @@ class HomeRepository(
                 data.value = response.body()
                 Log.d("PureBBS", "getUser return ${data.value}")
 
-                updateByHomeDao(data)
+                updateByPostDao(data)
 
             }
 
@@ -94,18 +93,18 @@ class HomeRepository(
         return data
     }
 
-    private fun updateByHomeDao(data: MutableLiveData<HttpData.User>) {
+    private fun updateByPostDao(data: MutableLiveData<HttpData.User>) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            Log.d("PureBBS", "viewModelScope call homeDao ${data.value}")
+            Log.d("PureBBS", "viewModelScope call postDao ${data.value}")
 
-            homeDao.deleteAllServerInfo()// Delete all content here.
+            postDao.deleteAllServerInfo()// Delete all content here.
             // Add sample words.
             var serverInfo = ServerInfo(
                 num,
                 data.value?.name.toString()
             )
-            homeDao.insertServerInfo(serverInfo)
+            postDao.insertServerInfo(serverInfo)
             num++
         }
     }
@@ -117,15 +116,15 @@ class HomeRepository(
 
             val data = httpApi.getJsonUserById(id)
 
-            Log.d("PureBBS", "getJsonUserById -------- viewModelScope call homeDao ${data}")
+            Log.d("PureBBS", "getJsonUserById -------- viewModelScope call postDao ${data}")
 
-            homeDao.deleteAllServerInfo()// Delete all content here.
+            postDao.deleteAllServerInfo()// Delete all content here.
             // Add sample words.
             var serverInfo = ServerInfo(
                 num,
                 data?.name.toString()
             )
-            homeDao.insertServerInfo(serverInfo)
+            postDao.insertServerInfo(serverInfo)
             num++
         }
 

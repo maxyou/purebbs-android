@@ -1,19 +1,15 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.maxproj.purebbs.R
-import com.maxproj.purebbs.home.PostBrief
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
 
-    lateinit var viewModel: HomeViewModel
+    lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
     var data =  listOf<PostBrief>()
@@ -50,7 +46,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     class PostBriefItemViewHolder(val binding: PostItemViewBinding ): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: PostBrief, viewModel:HomeViewModel){
+        fun bind(item: PostBrief, viewModel:PostViewModel){
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //

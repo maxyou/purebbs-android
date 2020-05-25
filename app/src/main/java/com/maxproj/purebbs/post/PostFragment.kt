@@ -1,4 +1,4 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 
 import android.os.Bundle
 import android.util.Log
@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.maxproj.purebbs.databinding.HomeFragmentBinding
+import com.maxproj.purebbs.databinding.PostFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
-class HomeFragment : Fragment(){
+class PostFragment : Fragment(){
     private val viewModel by lazy {
-//        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+//        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(PostViewModel::class.java)
         var activity = activity as AppCompatActivity
-//        ViewModelProvider(activity, HomeViewModelFactory(activity.application, HttpService.api())).get(HomeViewModel::class.java)
-        ViewModelProvider(activity, HomeViewModelFactory(activity.application, HttpService.api)).get(HomeViewModel::class.java)
+//        ViewModelProvider(activity, PostViewModelFactory(activity.application, HttpService.api())).get(PostViewModel::class.java)
+        ViewModelProvider(activity, PostViewModelFactory(activity.application, HttpService.api)).get(PostViewModel::class.java)
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,16 +25,16 @@ class HomeFragment : Fragment(){
     ): View? {
         setHasOptionsMenu(true)
 
-        val binding: HomeFragmentBinding = HomeFragmentBinding.inflate(layoutInflater)
+        val binding: PostFragmentBinding = PostFragmentBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         viewModel.postAdapter.data = mockPostData()
         viewModel.postAdapter.viewModel = viewModel
         viewModel.postAdapter.lifecycleOwner = this
-        binding.homeRecyclerview.adapter = viewModel.postAdapter
+        binding.postRecyclerview.adapter = viewModel.postAdapter
 
         return binding.root
-//        return inflater.inflate(R.layout.home_fragment, container, false)
+//        return inflater.inflate(R.layout.post_fragment, container, false)
     }
 
 }

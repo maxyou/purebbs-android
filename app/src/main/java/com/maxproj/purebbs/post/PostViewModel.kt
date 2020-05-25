@@ -1,25 +1,19 @@
-package com.maxproj.purebbs.home
+package com.maxproj.purebbs.post
 import android.app.Application
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
 import com.maxproj.purebbs.net.HttpApi
-import com.maxproj.purebbs.net.HttpData
-import com.maxproj.purebbs.net.HttpService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
 
-class HomeViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
+class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
-    private var homeRepository:HomeRepository
+    private var postRepository:PostRepository
     val serverInfo:LiveData<List<ServerInfo>>
     init {
-        val homeDao = HomeRoomDatabase.getDatabase(application, viewModelScope).homeDao()
-        homeRepository = HomeRepository(viewModelScope, homeDao, httpApi)
-        serverInfo = homeRepository.serverInfo
+        val postDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()
+        postRepository = PostRepository(viewModelScope, postDao, httpApi)
+        serverInfo = postRepository.serverInfo
     }
 
     private val _replyNum = MutableLiveData<Int>(0)
@@ -40,12 +34,12 @@ class HomeViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         Log.d("PureBBS", "onClickItemUser")
     }
     fun gotoDetail(view: View){
-        Navigation.findNavController(view).navigate(HomeFragmentDirections.actionHomeDestToDetailDest())
+        Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
     }
 
     fun refresh(){
-//        homeRepository.serverInfoUpdate()
-        homeRepository.getJsonUserById("abc")
+//        postRepository.serverInfoUpdate()
+        postRepository.getJsonUserById("abc")
     }
 
 

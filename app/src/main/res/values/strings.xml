@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PureBBS</string>
     <string name="abc">abc</string>
-    <string name="home_fragment">HomeFragment</string>
+    <string name="post_fragment">PostFragment</string>
     <string name="detail_fragment">DetailFragment</string>
     <string name="refresh">refresh</string>
 
