@@ -39,7 +39,8 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
 
     fun refresh(){
 //        postRepository.serverInfoUpdate()
-        postRepository.getJsonUserById("abc")
+//        postRepository.getJsonUserById("abc")
+        postRepository.getPostList()
     }
 
 

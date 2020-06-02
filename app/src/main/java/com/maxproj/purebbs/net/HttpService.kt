@@ -11,7 +11,7 @@ import java.io.IOException
 
 object HttpService {
 
-    val baseUrl:String = "http://192.168.31.70:3000"
+    val baseUrl:String = "http://192.168.31.70:3001"
 
     val api by lazy {
         val interceptor: Interceptor = object : Interceptor {
@@ -59,7 +59,7 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://192.168.31.70:3000")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

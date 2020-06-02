@@ -2,6 +2,8 @@ package com.maxproj.purebbs.post
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
 import kotlinx.coroutines.CoroutineScope
@@ -129,6 +131,50 @@ class PostRepository(
         }
 
 
+    }
+
+
+    fun getPostList(){
+        viewModelScope.launch(Dispatchers.IO) {
+
+//            val pageInfo:String = "{\"query\":{},\"options\":{\"offset\":0,\"limit\":10,\"sort\":{\"allUpdated\":-1},\"select\":\"source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend\"}}"
+//            val data = httpApi.getPostByPaginate(pageInfo)
+
+            val query = HttpData.QueryPostList(
+                query = HttpData.QueryPostList.QueryCategory("category_dev_web"),
+                options = HttpData.QueryPostList.Options(
+                    offset = 0,
+                    limit = 10,
+                    sort = HttpData.QueryPostList.Options.Sort(allUpdated = -1),
+                    select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
+                )
+            )
+            val queryStr = GsonBuilder().create().toJson(query)
+            val queryStr2 = Gson().toJson(query)
+            Log.d("PureBBS", "query string: $queryStr")
+            Log.d("PureBBS", "query2 string: $queryStr2")
+            val data = httpApi.getPostByPaginate(queryStr)
+//            val data = httpApi.getPostByPaginate(object {
+//                val query = HttpData.QueryPostList.QueryCategory("category_dev_web")
+//                val options = HttpData.QueryPostList.Options(
+//                    offset = 0,
+//                    limit = 10,
+//                    sort = HttpData.QueryPostList.Options.Sort(allUpdated = -1),
+//                    select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
+//                )
+//            }.toString())
+
+            Log.d("PureBBS", "getPostList ${data.toString()}")
+
+            postDao.deleteAllServerInfo()// Delete all content here.
+            // Add sample words.
+            var serverInfo = ServerInfo(
+                num,
+                data?.message
+            )
+            postDao.insertServerInfo(serverInfo)
+            num++
+        }
     }
 
 //    fun tryHttp(){

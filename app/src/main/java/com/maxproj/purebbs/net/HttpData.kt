@@ -4,6 +4,22 @@ import com.google.gson.annotations.SerializedName
 
 class HttpData {
 
+    data class QueryPostList(
+        val query:QueryCategory,
+        val options:Options
+    ){
+        data class QueryCategory(val category:String)
+
+        data class Options(
+            val offset:Int,
+            val limit:Int,
+            val sort:Sort,
+            val select:String
+        ){
+            data class Sort(val allUpdated: Int)
+        }
+    }
+
     data class User (
         var name:String,
         var tel:String

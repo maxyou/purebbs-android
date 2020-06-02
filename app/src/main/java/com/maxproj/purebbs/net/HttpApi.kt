@@ -39,10 +39,9 @@ interface HttpApi {
 //    ): Call<HttpData.JsonNewsGroupRet?>?
 
     @GET("post/getpage")
-    fun getPostByPaginate(
-        @Query("offset") offset: Int,
-        @Query("limit") limit: Int
-    ): Call<HttpData.PostListRet>?
+    suspend fun getPostByPaginate(
+        @Query("pageInfo") pageInfo: String
+    ): HttpData.PostListRet
 
     @GET("api/v1/topics")
     fun getHotTopics(
@@ -64,10 +63,9 @@ interface HttpApi {
     suspend fun getJsonUserById(
         @Query("jsonUserId") tab: String
     ): HttpData.User
-    @GET("jsonUserId")
 
+    @GET("jsonUserId")
     suspend fun getJsonUserByIdR(
         @Query("jsonUserId") tab: String
     ): Response<HttpData.User>
-
 }
