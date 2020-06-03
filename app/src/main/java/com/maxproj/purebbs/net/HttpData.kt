@@ -1,14 +1,15 @@
 package com.maxproj.purebbs.net
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class HttpData {
 
-    data class QueryPostList(
-        val query:QueryCategory,
+    data class PostListQuery(
+        val query:Category,
         val options:Options
     ){
-        data class QueryCategory(val category:String)
+        data class Category(val category:String)
 
         data class Options(
             val offset:Int,
@@ -26,7 +27,30 @@ class HttpData {
     )
     data class ExpressJson(val msg:String)
 
-    data class PostListRet(val code:Int, val message:String, val data:List<String>, val totalDocs:Int)
+    data class PostListRet(val code:Int, val message:String, val data:List<PostItem>, val totalDocs:Int){
+        data class PostItem(
+            val _id:String,
+            val extend:Any,
+            val author: String,
+            val authorId: String,
+            val anonymous: Boolean,
+            val source: String,
+            val title: String,
+            val commentNum: Int,
+            val stickTop: Boolean,
+            val category: String,
+            val postId: String,
+            val avatarFileName: String,
+            val oauth: Oauth,
+            val created: Date,
+        val updated: Date,
+        val allUpdated: Date,
+        val likeUser: List<Any>,
+        val likeHasCurrentUser: Boolean
+        ){
+            data class Oauth(val avatarUrl:String)
+        }
+    }
 
     data class CnNodeTopics(
         val success:Boolean,
