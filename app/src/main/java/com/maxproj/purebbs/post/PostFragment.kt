@@ -13,12 +13,13 @@ import com.maxproj.purebbs.databinding.PostFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
 class PostFragment : Fragment(){
+
     private val viewModel by lazy {
-//        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(PostViewModel::class.java)
-        var activity = activity as AppCompatActivity
-//        ViewModelProvider(activity, PostViewModelFactory(activity.application, HttpService.api())).get(PostViewModel::class.java)
-        ViewModelProvider(activity, PostViewModelFactory(activity.application, HttpService.api)).get(PostViewModel::class.java)
+//        var activity = activity as AppCompatActivity
+        ViewModelProvider(this.requireActivity(), PostViewModelFactory(this.requireActivity().application, HttpService.api))
+            .get(PostViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,20 +27,27 @@ class PostFragment : Fragment(){
     ): View? {
         setHasOptionsMenu(true)
 
+        val binding: PostFragmentBinding = bindingViewModelInit()
+
+        return binding.root
+    }
+
+    private fun bindingViewModelInit(): PostFragmentBinding {
+
         val binding: PostFragmentBinding = PostFragmentBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-//        viewModel.postAdapter.data = mockPostData()
+
+        //        viewModel.postAdapter.data = mockPostData()
         viewModel.postAdapter.viewModel = viewModel
         viewModel.postAdapter.lifecycleOwner = this
+        binding.viewModel = viewModel
+
         binding.postRecyclerview.adapter = viewModel.postAdapter
 
         viewModel.postList.observe(viewLifecycleOwner, Observer {
             viewModel.postAdapter.data = it
         })
-
-        return binding.root
-//        return inflater.inflate(R.layout.post_fragment, container, false)
+        return binding
     }
 
 }
