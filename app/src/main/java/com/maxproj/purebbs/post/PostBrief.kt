@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "post_table")
 data class PostBrief (
-    @PrimaryKey var _id:Int,
+    @PrimaryKey var _id:String,
     var user:String,
     var postTitle:String,
     var postCategory:String,

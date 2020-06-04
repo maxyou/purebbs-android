@@ -19,6 +19,14 @@ class PostRepository(
     private val httpApi: HttpApi
 ) {
 
+    lateinit var postList: LiveData<List<PostBrief>>
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+//            postList = postDao.getPostList()
+        }
+    }
+
     val serverInfo: LiveData<List<ServerInfo>> = postDao.getServerInfo()
     var num: Int = 1
     fun serverInfoUpdate() {
@@ -133,12 +141,8 @@ class PostRepository(
 
     }
 
-
     fun getPostList(){
         viewModelScope.launch(Dispatchers.IO) {
-
-//            val pageInfo:String = "{\"query\":{},\"options\":{\"offset\":0,\"limit\":10,\"sort\":{\"allUpdated\":-1},\"select\":\"source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend\"}}"
-//            val data = httpApi.getPostByPaginate(pageInfo)
 
             val query = HttpData.PostListQuery(
                 query = HttpData.PostListQuery.Category("category_dev_web"),
@@ -149,31 +153,15 @@ class PostRepository(
                     select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
                 )
             )
-            val queryStr = GsonBuilder().create().toJson(query)
-            val queryStr2 = Gson().toJson(query)
+            val queryStr = Gson().toJson(query)
             Log.d("PureBBS", "query string: $queryStr")
-            Log.d("PureBBS", "query2 string: $queryStr2")
             val data = httpApi.getPostByPaginate(queryStr)
-//            val data = httpApi.getPostByPaginate(object {
-//                val query = HttpData.QueryPostList.QueryCategory("category_dev_web")
-//                val options = HttpData.QueryPostList.Options(
-//                    offset = 0,
-//                    limit = 10,
-//                    sort = HttpData.QueryPostList.Options.Sort(allUpdated = -1),
-//                    select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
-//                )
-//            }.toString())
-
             Log.d("PureBBS", "getPostList ${data.toString()}")
 
-            postDao.deleteAllServerInfo()// Delete all content here.
-            // Add sample words.
-            var serverInfo = ServerInfo(
-                num,
-                data?.message
-            )
-            postDao.insertServerInfo(serverInfo)
-            num++
+//            postDao.deleteAllPost()
+//            postDao.insertList(data.data.map {
+//                PostBrief(it._id, it.authorId, it.title, it.category,it.created.toString())
+//            })
         }
     }
 

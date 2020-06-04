@@ -9,11 +9,13 @@ import com.maxproj.purebbs.net.HttpApi
 class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
     private var postRepository:PostRepository
+    val postList:LiveData<List<PostBrief>>
     val serverInfo:LiveData<List<ServerInfo>>
     init {
         val postDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()
         postRepository = PostRepository(viewModelScope, postDao, httpApi)
         serverInfo = postRepository.serverInfo
+        postList = postRepository.postList
     }
 
     private val _replyNum = MutableLiveData<Int>(0)
@@ -24,6 +26,8 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         _replyNum.value = (_replyNum.value ?: 0) + 1
 //        _replyNum.setValue(_replyNum.value!! + 1)
         println(_replyNum.value.toString())
+
+        postAdapter.data = mockPostData()
     }
 
     var category:String = "not used"

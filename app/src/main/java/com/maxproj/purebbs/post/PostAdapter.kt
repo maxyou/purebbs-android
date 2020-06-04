@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
@@ -11,6 +12,8 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
+
+//    lateinit var livaData: LiveData<List<PostBrief>>
 
     var data =  listOf<PostBrief>()
         set(value) {

@@ -47,27 +47,27 @@ abstract class PostRoomDatabase : RoomDatabase(){
                 scope.launch {
                     var postDao = database.postDao()
 
-                    postDao.deleteAll()// Delete all content here.
-                    // Add sample words.
-                    var postBrief = PostBrief(
-                        0,
-                        "Alex",
-                        "I find something!",
-                        "share",
-                        "2020-0519-0509-01-001"
-                    )
-                    postDao.insert(postBrief)
-
-                    postDao.deleteAllServerInfo()// Delete all content here.
-                    // Add sample words.
-                    (0..5).forEach {
-
-                        var serverInfo = ServerInfo(
-                            it,
-                            "Alex $it"
-                        )
-                        postDao.insertServerInfo(serverInfo)
-                    }
+//                    postDao.deleteAll()// Delete all content here.
+//                    // Add sample words.
+//                    var postBrief = PostBrief(
+//                        0,
+//                        "Alex",
+//                        "I find something!",
+//                        "share",
+//                        "2020-0519-0509-01-001"
+//                    )
+//                    postDao.insert(postBrief)
+//
+//                    postDao.deleteAllServerInfo()// Delete all content here.
+//                    // Add sample words.
+//                    (0..5).forEach {
+//
+//                        var serverInfo = ServerInfo(
+//                            it,
+//                            "Alex $it"
+//                        )
+//                        postDao.insertServerInfo(serverInfo)
+//                    }
 
                 }
             }
