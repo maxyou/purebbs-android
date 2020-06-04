@@ -19,13 +19,9 @@ class PostRepository(
     private val httpApi: HttpApi
 ) {
 
-    lateinit var postList: LiveData<List<PostBrief>>
+//    var postList: LiveData<List<PostBrief>> = MutableLiveData<List<PostBrief>>()
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-//            postList = postDao.getPostList()
-        }
-    }
+    var postList: LiveData<List<PostBrief>> = postDao.getPostList()
 
     val serverInfo: LiveData<List<ServerInfo>> = postDao.getServerInfo()
     var num: Int = 1
@@ -158,10 +154,10 @@ class PostRepository(
             val data = httpApi.getPostByPaginate(queryStr)
             Log.d("PureBBS", "getPostList ${data.toString()}")
 
-//            postDao.deleteAllPost()
-//            postDao.insertList(data.data.map {
-//                PostBrief(it._id, it.authorId, it.title, it.category,it.created.toString())
-//            })
+            postDao.deleteAllPost()
+            postDao.insertList(data.data.map {
+                PostBrief(it._id, it.authorId, it.title, it.category,it.created.toString())
+            })
         }
     }
 
