@@ -9,7 +9,9 @@ data class PostBrief (
     var user:String,
     var postTitle:String,
     var postCategory:String,
-    var createTime:String
+    var createTime:String,
+    var commentNum:Int,
+    var stickTop:Boolean
 )
 
 @Entity(tableName = "server_info_table")

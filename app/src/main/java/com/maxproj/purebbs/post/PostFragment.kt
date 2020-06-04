@@ -62,7 +62,9 @@ fun mockPostData():List<PostBrief>{
                 "user: $it",
                 "title $it - ${(100..200).random()}",
                 "category",
-                "2020-0519-0510-01-001"
+                "2020-0519-0510-01-001",
+                1,
+                false
             )
         )
         Log.d("PureBBS", "mock post data: $it")

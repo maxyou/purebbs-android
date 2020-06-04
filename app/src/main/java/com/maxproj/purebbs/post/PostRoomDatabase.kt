@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PostBrief::class, ServerInfo::class), version = 2, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class, ServerInfo::class), version = 3, exportSchema = false)
 abstract class PostRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
@@ -30,6 +30,7 @@ abstract class PostRoomDatabase : RoomDatabase(){
                     "post_database"
                 )
                     .addCallback(PostDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration() //this will remove all data of last version, just for dev
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -54,7 +55,9 @@ abstract class PostRoomDatabase : RoomDatabase(){
                         "Alex",
                         "I find something!",
                         "share",
-                        "2020-0519-0509-01-001"
+                        "2020-0519-0509-01-001",
+                        1,
+                        false
                     )
                     postDao.insertPost(postBrief)
 

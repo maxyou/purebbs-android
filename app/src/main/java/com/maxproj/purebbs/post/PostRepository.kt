@@ -156,7 +156,14 @@ class PostRepository(
 
             postDao.deleteAllPost()
             postDao.insertList(data.data.map {
-                PostBrief(it._id, it.authorId, it.title, it.category,it.created.toString())
+                PostBrief(
+                    _id = it._id,
+                    user = it.authorId,
+                    postTitle = it.title,
+                    postCategory = it.category,
+                    createTime = it.created.toString(),
+                    commentNum = it.commentNum,
+                    stickTop = it.stickTop)
             })
         }
     }
