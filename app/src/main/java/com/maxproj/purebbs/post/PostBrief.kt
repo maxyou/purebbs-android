@@ -13,9 +13,3 @@ data class PostBrief (
     var commentNum:Int,
     var stickTop:Boolean
 )
-
-@Entity(tableName = "server_info_table")
-data class ServerInfo (
-    @PrimaryKey var _id:Int,
-    var info:String
-)

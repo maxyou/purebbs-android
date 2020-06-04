@@ -4,7 +4,9 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
+import com.google.gson.Gson
 import com.maxproj.purebbs.net.HttpApi
+import com.maxproj.purebbs.net.HttpData
 
 class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
@@ -25,10 +27,18 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
     }
 
-    fun refresh(){
-//        postRepository.serverInfoUpdate()
-//        postRepository.getJsonUserById("abc")
-        postRepository.getPostList()
+    fun refreshPostList(){
+        val query = HttpData.PostListQuery(
+            query = HttpData.PostListQuery.Category("category_dev_web"),
+            options = HttpData.PostListQuery.Options(
+                offset = 0,
+                limit = 10,
+                sort = HttpData.PostListQuery.Options.Sort(allUpdated = -1),
+                select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
+            )
+        )
+        val queryStr = Gson().toJson(query)
+        postRepository.refreshPostList(queryStr)
     }
 
 

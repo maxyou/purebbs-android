@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PostBrief::class, ServerInfo::class), version = 3, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class), version = 4, exportSchema = false)
 abstract class PostRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
@@ -60,17 +60,6 @@ abstract class PostRoomDatabase : RoomDatabase(){
                         false
                     )
                     postDao.insertPost(postBrief)
-
-                    postDao.deleteAllServerInfo()// Delete all content here.
-                    // Add sample words.
-                    (0..5).forEach {
-
-                        var serverInfo = ServerInfo(
-                            it,
-                            "Alex $it"
-                        )
-                        postDao.insertServerInfo(serverInfo)
-                    }
 
                 }
             }

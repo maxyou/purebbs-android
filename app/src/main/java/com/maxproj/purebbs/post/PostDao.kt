@@ -23,7 +23,6 @@ interface PostDao {
 //    @Query("SELECT * from post_table ORDER BY postTitle ASC")
 //    suspend fun getPostList(): LiveData<List<PostBrief>> //----------- 编译报错
 
-    //-----------PostBrief--------------------
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPost(postBrief: PostBrief)
@@ -40,18 +39,4 @@ interface PostDao {
     @Query("DELETE FROM post_table")
     suspend fun deleteAllPost()
 
-    //-------------for test----------------
-    @Query("SELECT * from server_info_table ORDER BY info ASC")
-    fun getServerInfo(): LiveData<List<ServerInfo>>
-
-    @Query("SELECT * from server_info_table ORDER BY info ASC")
-    fun getServerInfo2(): List<ServerInfo>
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertServerInfo(serverInfo: ServerInfo)
-
-    @Query("DELETE FROM server_info_table")
-    suspend fun deleteAllServerInfo()
-
-    @Delete
-    suspend fun delete(serverInfo: ServerInfo)}
+}

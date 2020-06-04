@@ -13,8 +13,6 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
-//    lateinit var livaData: LiveData<List<PostBrief>>
-
     var data =  listOf<PostBrief>()
         set(value) {
             Log.d("PureBBS", "adapter post data: $value")
