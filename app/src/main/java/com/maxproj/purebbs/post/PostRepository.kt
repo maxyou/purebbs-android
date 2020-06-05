@@ -43,9 +43,11 @@ class PostRepository(
 
             postDao.deleteAllPost()
             postDao.insertList(data.data.map {
+                Log.d("PureBBS", it.toString())
                 PostBrief(
                     _id = it._id,
                     user = it.authorId,
+                    avatarFileName = it.avatarFileName,
                     postTitle = it.title,
                     postCategory = it.category,
                     createTime = it.created.toString(),

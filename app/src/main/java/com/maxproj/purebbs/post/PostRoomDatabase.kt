@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PostBrief::class), version = 4, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class), version = 6, exportSchema = false)
 abstract class PostRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
@@ -53,6 +53,7 @@ abstract class PostRoomDatabase : RoomDatabase(){
                     var postBrief = PostBrief(
                         "0",
                         "Alex",
+                        "",
                         "I find something!",
                         "share",
                         "2020-0519-0509-01-001",

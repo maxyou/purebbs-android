@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 data class PostBrief (
     @PrimaryKey var _id:String,
     var user:String,
-    var postTitle:String,
-    var postCategory:String,
-    var createTime:String,
-    var commentNum:Int,
-    var stickTop:Boolean
+    var avatarFileName:String?,
+    var postTitle:String?,
+    var postCategory:String?,
+    var createTime:String?,
+    var commentNum:Int?,
+    var stickTop:Boolean?
 )

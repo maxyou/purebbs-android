@@ -1,5 +1,6 @@
 package com.maxproj.purebbs.net
 
+import com.maxproj.purebbs.Config
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,7 +12,7 @@ import java.io.IOException
 
 object HttpService {
 
-    val baseUrl:String = "http://192.168.31.70:3001"
+
 
     val api by lazy {
         val interceptor: Interceptor = object : Interceptor {
@@ -33,7 +34,7 @@ object HttpService {
 
         Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(baseUrl)
+            .baseUrl(Config.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build().create(HttpApi::class.java)
@@ -59,7 +60,7 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(baseUrl)
+            .baseUrl(Config.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

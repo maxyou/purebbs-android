@@ -60,6 +60,7 @@ fun mockPostData():List<PostBrief>{
             PostBrief(
                 it.toString(),
                 "user: $it",
+                "",
                 "title $it - ${(100..200).random()}",
                 "category",
                 "2020-0519-0510-01-001",
