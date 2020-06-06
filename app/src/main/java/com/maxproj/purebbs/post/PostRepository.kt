@@ -40,9 +40,38 @@ class PostRepository(
             Log.d("PureBBS", "http get: ${data.data}")
             postDao.insertList(data.data)
             Log.d("PureBBS", "after postDao insert list")
+//            postDao.insertPost(
+//                PostBrief(
+//                    _id = "it.toString()",
+//                    author = "user",
+//                    authorId = "authorId",
+//                    postId = "postId",
+//                    category = "category",
+//                    created = "2020-0519-0510-01-001",
+//                    commentNum = 1,
+//                    avatarFileName = "aaa",
+//                    source = "register",
+//                    title = "title",
+//                    content = "content",
+//                    allUpdated = "2020-0519-0510-01-001",
+//                    updated = "2020-0519-0510-01-001",
+//                    stickTop = false
+//                )
+//            )
+//            Log.d("PureBBS", "after postDao insert PostBrief")
         }
     }
 
+    //            PostBrief(
+//                it.toString(),
+//                "user: $it",
+//                "",
+//                "title $it - ${(100..200).random()}",
+//                "category",
+//                "2020-0519-0510-01-001",
+//                1,
+//                false
+//            )
 //    fun tryHttp(){
 //        var repos = HttpService.api().getExpressJson()
 //

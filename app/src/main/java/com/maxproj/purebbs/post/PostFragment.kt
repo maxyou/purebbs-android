@@ -45,6 +45,7 @@ class PostFragment : Fragment(){
         binding.postRecyclerview.adapter = viewModel.postAdapter
 
         viewModel.postList.observe(viewLifecycleOwner, Observer {
+            Log.d("PureBBS", "Observed postList onChange")
             viewModel.postAdapter.data = it
         })
         return binding
