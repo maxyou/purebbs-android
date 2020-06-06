@@ -17,14 +17,14 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
-    var data =  listOf<PostBrief>()
+    var data = listOf<PostBrief>()
         set(value) {
             Log.d("PureBBS", "adapter post data: $value")
             field = value
             notifyDataSetChanged()
         }
 
-    override fun getItemCount():Int{
+    override fun getItemCount(): Int {
         Log.d("PureBBS", "adapter get data size: ${data.size}")
         return data.size
     }
@@ -41,28 +41,18 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
 
-        Log.d("PureBBS", "adapter onCreateViewHolder")
-        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        Log.d("PureBBS", "adapter onCreateViewHolder 2")
-            Log.d("PureBBS", "adapter onCreateViewHolder 2 ----- before set lifecycleOwner")
-            binding.lifecycleOwner = lifecycleOwner
-            Log.d("PureBBS", "adapter onCreateViewHolder 2 ----- after set lifecycleOwner")
-        try{
-        }catch (e:Throwable){
-            Log.d("PureBBS", e.toString())
-        }
-        Log.d("PureBBS", "adapter onCreateViewHolder 3")
+        binding.lifecycleOwner = lifecycleOwner
 
-//        val layoutInflater = LayoutInflater.from(parent.context)
-//        val view = layoutInflater
-//            .inflate(R.layout.post_item_view, parent, false)// as TextView
         return PostBriefItemViewHolder(binding)
     }
 
-    class PostBriefItemViewHolder(val binding: PostItemViewBinding ): RecyclerView.ViewHolder(binding.root){
+    class PostBriefItemViewHolder(val binding: PostItemViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PostBrief, viewModel:PostViewModel){
+        fun bind(item: PostBrief, viewModel: PostViewModel) {
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
@@ -71,11 +61,11 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 }
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, item: PostBrief?){
+fun loadImage(view: ImageView, item: PostBrief?) {
 
     Log.d("PureBBS", "loadImage .... ${item?.toString()}")
 
-    if(item != null) {
+    if (item != null) {
         val path = Config.calcAvatarPath(
             source = item.source,
             avatarFileName = item.avatarFileName,
@@ -86,11 +76,5 @@ fun loadImage(view: ImageView, item: PostBrief?){
         Log.d("PureBBS", "image path: $path")
         Glide.with(view.context).load("${path}").into(view)
     }
-//    Log.d("PureBBS", "image url:$url")
-//    if(url != null){
-//        val path:String = URL(Config.BASE_URL, Config.PATH_AVATAR + url).toString()
-//        Log.d("PureBBS", "image path:$path")
-//        Glide.with(view.context).load("${path}").into(view)
-//    }
 }
 

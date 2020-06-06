@@ -11,7 +11,7 @@ class Converters {
     private val SEPARATOR = ","
 
     @TypeConverter
-    fun toLikeUser(str: String?): List<PostBrief.LikeUser>? {
+    fun toLikeUser(str: String?): List<PostBrief.LikeUser?>? {
         return str?.split(SEPARATOR)?.map { PostBrief.LikeUser.fromJsonStr(it) }
     }
     @TypeConverter
@@ -36,7 +36,7 @@ class Converters {
     }
 }
 
-@Database(entities = arrayOf(PostBrief::class), version = 12, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class), version = 16, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PostRoomDatabase : RoomDatabase(){
 
