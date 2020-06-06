@@ -13,20 +13,29 @@ object Config {
         anonymous: Boolean,
         isMyself: Boolean
     ): String {
+
+        fun aa(base:URL, path:String, file:String):String{
+            return URL(base, path+file).toString()
+        }
+
         if (anonymous) {
             if (isMyself) {
-                return PATH_AVATAR + "myanonymous.png"
+                return URL(BASE_URL, PATH_AVATAR + "myanonymous.png").toString()
+//                return PATH_AVATAR + "myanonymous.png"
             } else {
-                return PATH_AVATAR + "anonymous.png"
+                return URL(BASE_URL, PATH_AVATAR + "anonymous.png").toString()
+//                return PATH_AVATAR + "anonymous.png"
             }
         } else {
             if (source == "oauth") {
                 return oauth_avatarUrl!!
             } else {//暂时认为只有 oauth 及 register 两类
                 if (avatarFileName != null) {
-                    return PATH_AVATAR + avatarFileName
+                    return URL(BASE_URL, PATH_AVATAR + avatarFileName).toString()
+//                    return PATH_AVATAR + avatarFileName
                 } else {
-                    return PATH_AVATAR + "default.png"
+                    return URL(BASE_URL, PATH_AVATAR + "default.png").toString()
+//                    return PATH_AVATAR + "default.png"
                 }
             }
         }

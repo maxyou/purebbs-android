@@ -30,6 +30,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: PostBriefItemViewHolder, position: Int) {
+        Log.d("PureBBS", "adapter onBindViewHolder")
         val item = data[position]
         Log.d("PureBBS", "adapter onBindViewHolder item: $item")
         holder.bind(item, viewModel)
@@ -39,10 +40,20 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
-        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        binding.lifecycleOwner = lifecycleOwner
 
         Log.d("PureBBS", "adapter onCreateViewHolder")
+        val binding = PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        Log.d("PureBBS", "adapter onCreateViewHolder 2")
+            Log.d("PureBBS", "adapter onCreateViewHolder 2 ----- before set lifecycleOwner")
+            binding.lifecycleOwner = lifecycleOwner
+            Log.d("PureBBS", "adapter onCreateViewHolder 2 ----- after set lifecycleOwner")
+        try{
+        }catch (e:Throwable){
+            Log.d("PureBBS", e.toString())
+        }
+        Log.d("PureBBS", "adapter onCreateViewHolder 3")
+
 //        val layoutInflater = LayoutInflater.from(parent.context)
 //        val view = layoutInflater
 //            .inflate(R.layout.post_item_view, parent, false)// as TextView
@@ -60,18 +71,21 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 }
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, item: PostBrief){
+fun loadImage(view: ImageView, item: PostBrief?){
 
-    val path = Config.calcAvatarPath(
-        source = item.source,
-        avatarFileName = item.avatarFileName,
-        oauth_avatarUrl = "",//item.oauth?.avatarUrl,
-        anonymous = item.anonymous,
-        isMyself = false
-    )
-    Log.d("PureBBS", "image path: $path")
-    Glide.with(view.context).load("${path}").into(view)
+    Log.d("PureBBS", "loadImage .... ${item?.toString()}")
 
+    if(item != null) {
+        val path = Config.calcAvatarPath(
+            source = item.source,
+            avatarFileName = item.avatarFileName,
+            oauth_avatarUrl = item.oauth?.avatarUrl,
+            anonymous = item.anonymous,
+            isMyself = false
+        )
+        Log.d("PureBBS", "image path: $path")
+        Glide.with(view.context).load("${path}").into(view)
+    }
 //    Log.d("PureBBS", "image url:$url")
 //    if(url != null){
 //        val path:String = URL(Config.BASE_URL, Config.PATH_AVATAR + url).toString()

@@ -15,7 +15,7 @@ data class PostBrief (
     val avatarFileName:String?,
     val anonymous:Boolean = false,
     val source:String = "register",
-//    val oauth: Oauth?,
+    val oauth: Oauth?,
     val title:String? = "no title",
     val content:String? = "no content",
     val category: String,

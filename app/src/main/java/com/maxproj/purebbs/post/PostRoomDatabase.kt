@@ -36,7 +36,7 @@ class Converters {
     }
 }
 
-@Database(entities = arrayOf(PostBrief::class), version = 11, exportSchema = false)
+@Database(entities = arrayOf(PostBrief::class), version = 12, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PostRoomDatabase : RoomDatabase(){
 
