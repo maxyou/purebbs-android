@@ -8,7 +8,7 @@ import java.io.Serializable
 import java.util.*
 
 @Entity(tableName = "post_table")
-data class PostBrief (
+data class Post (
     @PrimaryKey var _id:String,
     val author:String = "unknow",
     val authorId:String = "-1",

@@ -1,8 +1,7 @@
 package com.maxproj.purebbs.net
 
 import com.google.gson.annotations.SerializedName
-import com.maxproj.purebbs.post.PostBrief
-import java.util.*
+import com.maxproj.purebbs.post.Post
 
 class HttpData {
 
@@ -28,7 +27,7 @@ class HttpData {
     )
     data class ExpressJson(val msg:String)
 
-    data class PostListRet(val code:Int, val message:String, val data:List<PostBrief>, val totalDocs:Int){
+    data class PostListRet(val code:Int, val message:String, val data:List<Post>, val totalDocs:Int){
 //        data class PostItem(
 //            val _id:String,
 //            val extend:Any,

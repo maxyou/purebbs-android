@@ -18,23 +18,23 @@ interface PostDao {
 //    suspend fun getPostList(): List<PostBrief>
 //
     @Query("SELECT * from post_table ORDER BY title ASC")
-    fun getPostList(): LiveData<List<PostBrief>>
+    fun getPostList(): LiveData<List<Post>>
 //
 //    @Query("SELECT * from post_table ORDER BY postTitle ASC")
 //    suspend fun getPostList(): LiveData<List<PostBrief>> //----------- 编译报错
 
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPost(postBrief: PostBrief)
+    suspend fun insertPost(post: Post)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertMany(vararg users: PostBrief)
+    suspend fun insertMany(vararg users: Post)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertList( list: List<PostBrief>)
+    suspend fun insertList( list: List<Post>)
 
     @Delete
-    suspend fun deletePost(postBrief: PostBrief)
+    suspend fun deletePost(post: Post)
 
     @Query("DELETE FROM post_table")
     suspend fun deleteAllPost()

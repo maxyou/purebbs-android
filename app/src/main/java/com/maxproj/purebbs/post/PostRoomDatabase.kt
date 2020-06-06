@@ -11,32 +11,32 @@ class Converters {
     private val SEPARATOR = ","
 
     @TypeConverter
-    fun toLikeUser(str: String?): List<PostBrief.LikeUser?>? {
-        return str?.split(SEPARATOR)?.map { PostBrief.LikeUser.fromJsonStr(it) }
+    fun toLikeUser(str: String?): List<Post.LikeUser?>? {
+        return str?.split(SEPARATOR)?.map { Post.LikeUser.fromJsonStr(it) }
     }
     @TypeConverter
-    fun fromListLikeUser(listLikeUser: List<PostBrief.LikeUser>): String? {
+    fun fromListLikeUser(listLikeUser: List<Post.LikeUser>): String? {
         return listLikeUser.map { it.toJsonStr() }.joinToString (separator = SEPARATOR)
     }
     @TypeConverter
-    fun toOauth(str: String?): PostBrief.Oauth? {
-        return Gson().fromJson(str, PostBrief.Oauth::class.java)
+    fun toOauth(str: String?): Post.Oauth? {
+        return Gson().fromJson(str, Post.Oauth::class.java)
     }
     @TypeConverter
-    fun fromOauth(oauth: PostBrief.Oauth?): String? {
+    fun fromOauth(oauth: Post.Oauth?): String? {
         return Gson().toJson(oauth)
     }
     @TypeConverter
-    fun toExtend(str: String?): PostBrief.Extend? {
-        return Gson().fromJson(str, PostBrief.Extend::class.java)
+    fun toExtend(str: String?): Post.Extend? {
+        return Gson().fromJson(str, Post.Extend::class.java)
     }
     @TypeConverter
-    fun fromExtend(extend: PostBrief.Extend?): String? {
+    fun fromExtend(extend: Post.Extend?): String? {
         return Gson().toJson(extend)
     }
 }
 
-@Database(entities = arrayOf(PostBrief::class), version = 16, exportSchema = false)
+@Database(entities = arrayOf(Post::class), version = 16, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PostRoomDatabase : RoomDatabase(){
 

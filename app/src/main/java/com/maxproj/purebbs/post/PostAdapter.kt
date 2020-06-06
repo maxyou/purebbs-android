@@ -12,12 +12,12 @@ import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 
-class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
+class PostAdapter : RecyclerView.Adapter<PostAdapter.PostItemViewHolder>() {
 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
-    var data = listOf<PostBrief>()
+    var data = listOf<Post>()
         set(value) {
             Log.d("PureBBS", "adapter post data: $value")
             field = value
@@ -29,7 +29,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
         return data.size
     }
 
-    override fun onBindViewHolder(holder: PostBriefItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostItemViewHolder, position: Int) {
         Log.d("PureBBS", "adapter onBindViewHolder")
         val item = data[position]
         Log.d("PureBBS", "adapter onBindViewHolder item: $item")
@@ -39,20 +39,20 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
         Log.d("PureBBS", "adapter onBindViewHolder: $position")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostBriefItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
 
         val binding =
             PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         binding.lifecycleOwner = lifecycleOwner
 
-        return PostBriefItemViewHolder(binding)
+        return PostItemViewHolder(binding)
     }
 
-    class PostBriefItemViewHolder(val binding: PostItemViewBinding) :
+    class PostItemViewHolder(val binding: PostItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PostBrief, viewModel: PostViewModel) {
+        fun bind(item: Post, viewModel: PostViewModel) {
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
@@ -61,7 +61,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 }
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, item: PostBrief?) {
+fun loadImage(view: ImageView, item: Post?) {
 
     Log.d("PureBBS", "loadImage .... ${item?.toString()}")
 

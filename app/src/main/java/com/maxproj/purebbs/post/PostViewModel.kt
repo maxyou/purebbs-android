@@ -1,6 +1,5 @@
 package com.maxproj.purebbs.post
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
@@ -11,7 +10,7 @@ import com.maxproj.purebbs.net.HttpData
 class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
     private var postRepository:PostRepository
-    val postList:LiveData<List<PostBrief>>
+    val postList:LiveData<List<Post>>
 
     init {
         val postDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()

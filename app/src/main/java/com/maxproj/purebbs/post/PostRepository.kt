@@ -15,7 +15,7 @@ class PostRepository(
     private val httpApi: HttpApi
 ) {
 
-    var postList: LiveData<List<PostBrief>> = postDao.getPostList()
+    var postList: LiveData<List<Post>> = postDao.getPostList()
 
     fun refreshPostList(queryStr:String) {
 
