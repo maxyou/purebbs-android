@@ -8,9 +8,8 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.maxproj.purebbs.Config
+import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.PostItemViewBinding
-import java.net.URL
 
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() {
@@ -61,12 +60,23 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostBriefItemViewHolder>() 
 }
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, url: String?){
-    Log.d("PureBBS", "image url:$url")
-    if(url != null){
-        val path:String = URL(Config.baseUrl, Config.avatarPath + url).toString()
-        Log.d("PureBBS", "image path:$path")
-        Glide.with(view.context).load("${path}").into(view)
-    }
+fun loadImage(view: ImageView, item: PostBrief){
+
+    val path = Config.calcAvatarPath(
+        source = item.source,
+        avatarFileName = item.avatarFileName,
+        oauth_avatarUrl = "",//item.oauth?.avatarUrl,
+        anonymous = item.anonymous,
+        isMyself = false
+    )
+    Log.d("PureBBS", "image path: $path")
+    Glide.with(view.context).load("${path}").into(view)
+
+//    Log.d("PureBBS", "image url:$url")
+//    if(url != null){
+//        val path:String = URL(Config.BASE_URL, Config.PATH_AVATAR + url).toString()
+//        Log.d("PureBBS", "image path:$path")
+//        Glide.with(view.context).load("${path}").into(view)
+//    }
 }
 

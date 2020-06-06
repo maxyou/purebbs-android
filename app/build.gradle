@@ -73,12 +73,14 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
 
-
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion" // For Kotlin use paging-runtime-ktx
     // alternatively - without Android dependencies for testing
     testImplementation "androidx.paging:paging-common:$rootProject.pagingVersion" // For Kotlin use paging-common-ktx
     // optional - RxJava support
     implementation "androidx.paging:paging-rxjava2:$rootProject.pagingVersion" // For Kotlin use paging-rxjava2-ktx
+
+    implementation'com.facebook.stetho:stetho:1.5.1'
+    implementation'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

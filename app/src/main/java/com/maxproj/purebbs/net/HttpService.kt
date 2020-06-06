@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.net
 
-import com.maxproj.purebbs.Config
+import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.maxproj.purebbs.config.Config
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,8 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 object HttpService {
-
-
 
     val api by lazy {
         val interceptor: Interceptor = object : Interceptor {
@@ -30,16 +29,19 @@ object HttpService {
         val okHttpClient = OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
 //            .sslSocketFactory(co.docy.ourgroups.NetTools.HttpTools.sslContext.getSocketFactory())
-            .addNetworkInterceptor(interceptor).build()
+            .addNetworkInterceptor(StethoInterceptor())
+            .addNetworkInterceptor(interceptor)
+            .build()
 
         Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Config.baseUrl)
+            .baseUrl(Config.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build().create(HttpApi::class.java)
     }
 
+    //not used
     private fun getRetrofit(): Retrofit {
         val interceptor: Interceptor = object : Interceptor {
             @Throws(IOException::class)
@@ -60,7 +62,7 @@ object HttpService {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(Config.baseUrl)
+            .baseUrl(Config.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 //            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

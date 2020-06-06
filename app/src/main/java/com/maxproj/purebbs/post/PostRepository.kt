@@ -2,17 +2,12 @@ package com.maxproj.purebbs.post
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.HttpException
-import retrofit2.Response
 
 class PostRepository(
     private val viewModelScope: CoroutineScope,
@@ -42,18 +37,9 @@ class PostRepository(
             }
 
             postDao.deleteAllPost()
-            postDao.insertList(data.data.map {
-                Log.d("PureBBS", it.toString())
-                PostBrief(
-                    _id = it._id,
-                    user = it.authorId,
-                    avatarFileName = it.avatarFileName,
-                    postTitle = it.title,
-                    postCategory = it.category,
-                    createTime = it.created.toString(),
-                    commentNum = it.commentNum,
-                    stickTop = it.stickTop)
-            })
+            Log.d("PureBBS", "http get: ${data.data}")
+            postDao.insertList(data.data)
+            Log.d("PureBBS", "after postDao insert list")
         }
     }
 

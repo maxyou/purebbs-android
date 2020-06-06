@@ -17,7 +17,7 @@ interface PostDao {
 //    @Query("SELECT * from post_table ORDER BY postTitle ASC")
 //    suspend fun getPostList(): List<PostBrief>
 //
-    @Query("SELECT * from post_table ORDER BY postTitle ASC")
+    @Query("SELECT * from post_table ORDER BY title ASC")
     fun getPostList(): LiveData<List<PostBrief>>
 //
 //    @Query("SELECT * from post_table ORDER BY postTitle ASC")

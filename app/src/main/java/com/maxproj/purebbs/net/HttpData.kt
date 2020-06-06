@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.net
 
 import com.google.gson.annotations.SerializedName
+import com.maxproj.purebbs.post.PostBrief
 import java.util.*
 
 class HttpData {
@@ -27,29 +28,29 @@ class HttpData {
     )
     data class ExpressJson(val msg:String)
 
-    data class PostListRet(val code:Int, val message:String, val data:List<PostItem>, val totalDocs:Int){
-        data class PostItem(
-            val _id:String,
-            val extend:Any,
-            val author: String,
-            val authorId: String,
-            val anonymous: Boolean,
-            val source: String,
-            val title: String,
-            val commentNum: Int,
-            val stickTop: Boolean,
-            val category: String,
-            val postId: String,
-            val avatarFileName: String,
-            val oauth: Oauth,
-            val created: Date,
-        val updated: Date,
-        val allUpdated: Date,
-        val likeUser: List<Any>,
-        val likeHasCurrentUser: Boolean
-        ){
-            data class Oauth(val avatarUrl:String)
-        }
+    data class PostListRet(val code:Int, val message:String, val data:List<PostBrief>, val totalDocs:Int){
+//        data class PostItem(
+//            val _id:String,
+//            val extend:Any,
+//            val author: String,
+//            val authorId: String,
+//            val anonymous: Boolean,
+//            val source: String,
+//            val title: String,
+//            val commentNum: Int,
+//            val stickTop: Boolean,
+//            val category: String,
+//            val postId: String,
+//            val avatarFileName: String,
+//            val oauth: Oauth,
+//            val created: Date,
+//            val updated: Date,
+//            val allUpdated: Date,
+//            val likeUser: List<Any>,
+//            val likeHasCurrentUser: Boolean
+//        ){
+//            data class Oauth(val avatarUrl:String)
+//        }
     }
 
     data class CnNodeTopics(

@@ -1,14 +1,43 @@
 package com.maxproj.purebbs.post
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(PostBrief::class), version = 6, exportSchema = false)
+class Converters {
+    private val SEPARATOR = ","
+
+    @TypeConverter
+    fun toLikeUser(str: String?): List<PostBrief.LikeUser>? {
+        return str?.split(SEPARATOR)?.map { PostBrief.LikeUser.fromJsonStr(it) }
+    }
+    @TypeConverter
+    fun fromListLikeUser(listLikeUser: List<PostBrief.LikeUser>): String? {
+        return listLikeUser.map { it.toJsonStr() }.joinToString (separator = SEPARATOR)
+    }
+    @TypeConverter
+    fun toOauth(str: String?): PostBrief.Oauth? {
+        return Gson().fromJson(str, PostBrief.Oauth::class.java)
+    }
+    @TypeConverter
+    fun fromOauth(oauth: PostBrief.Oauth?): String? {
+        return Gson().toJson(oauth)
+    }
+    @TypeConverter
+    fun toExtend(str: String?): PostBrief.Extend? {
+        return Gson().fromJson(str, PostBrief.Extend::class.java)
+    }
+    @TypeConverter
+    fun fromExtend(extend: PostBrief.Extend?): String? {
+        return Gson().toJson(extend)
+    }
+}
+
+@Database(entities = arrayOf(PostBrief::class), version = 10, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class PostRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
@@ -50,21 +79,20 @@ abstract class PostRoomDatabase : RoomDatabase(){
 
                     postDao.deleteAllPost()// Delete all content here.
                     // Add sample words.
-                    var postBrief = PostBrief(
-                        "0",
-                        "Alex",
-                        "",
-                        "I find something!",
-                        "share",
-                        "2020-0519-0509-01-001",
-                        1,
-                        false
-                    )
-                    postDao.insertPost(postBrief)
+//                    var postBrief = PostBrief(
+//                        "0",
+//                        "Alex",
+//                        "",
+//                        "I find something!",
+//                        "share",
+//                        "2020-0519-0509-01-001",
+//                        1,
+//                        false
+//                    )
+//                    postDao.insertPost(postBrief)
 
                 }
             }
         }
     }
-
 }
