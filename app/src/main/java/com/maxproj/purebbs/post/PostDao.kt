@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.post
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 
 @Dao
@@ -19,6 +20,9 @@ interface PostDao {
 //
     @Query("SELECT * from post_table ORDER BY title ASC")
     fun getPostList(): LiveData<List<Post>>
+
+    @Query("SELECT * from post_table ORDER BY title ASC")
+    fun getPostDataSource(): DataSource.Factory<Int, Post>
 //
 //    @Query("SELECT * from post_table ORDER BY postTitle ASC")
 //    suspend fun getPostList(): LiveData<List<PostBrief>> //----------- 编译报错
@@ -38,5 +42,8 @@ interface PostDao {
 
     @Query("DELETE FROM post_table")
     suspend fun deleteAllPost()
+
+    @Query("SELECT COUNT(_id) FROM post_table")
+    suspend fun getPostCount(): Int
 
 }

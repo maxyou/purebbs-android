@@ -3,6 +3,7 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
+import androidx.paging.PagedList
 import com.google.gson.Gson
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
@@ -10,7 +11,7 @@ import com.maxproj.purebbs.net.HttpData
 class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
     private var postRepository:PostRepository
-    val postList:LiveData<List<Post>>
+    val postList:LiveData<PagedList<Post>>?
 
     init {
         val postDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()

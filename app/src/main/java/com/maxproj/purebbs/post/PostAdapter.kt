@@ -6,34 +6,36 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 
-class PostAdapter : RecyclerView.Adapter<PostAdapter.PostItemViewHolder>() {
+class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_COMPARATOR) {
 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
-    var data = listOf<Post>()
-        set(value) {
-            Log.d("PureBBS", "adapter post data: $value")
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount(): Int {
-        Log.d("PureBBS", "adapter get data size: ${data.size}")
-        return data.size
-    }
+//    var data = listOf<Post>()
+//        set(value) {
+//            Log.d("PureBBS", "adapter post data: $value")
+//            field = value
+//            notifyDataSetChanged()
+//        }
+//
+//    override fun getItemCount(): Int {
+//        Log.d("PureBBS", "adapter get data size: ${data.size}")
+//        return data.size
+//    }
 
     override fun onBindViewHolder(holder: PostItemViewHolder, position: Int) {
         Log.d("PureBBS", "adapter onBindViewHolder")
-        val item = data[position]
+        val item = getItem(position)
         Log.d("PureBBS", "adapter onBindViewHolder item: $item")
-        holder.bind(item, viewModel)
+        holder.bind(item!!, viewModel)
 //        holder.user.text = item.user
 //        holder.title.text = item.postTitle
         Log.d("PureBBS", "adapter onBindViewHolder: $position")
@@ -56,6 +58,16 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostItemViewHolder>() {
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
+        }
+    }
+
+    companion object {
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
+            override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+                oldItem._id == newItem._id
+
+            override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+                oldItem == newItem
         }
     }
 }
