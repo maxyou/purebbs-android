@@ -27,19 +27,4 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
     }
 
-    fun refreshPostList(){
-        val query = HttpData.PostListQuery(
-            query = HttpData.PostListQuery.Category("category_dev_web"),
-            options = HttpData.PostListQuery.Options(
-                offset = 0,
-                limit = 10,
-                sort = HttpData.PostListQuery.Options.Sort(allUpdated = -1),
-                select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
-            )
-        )
-        val queryStr = Gson().toJson(query)
-        postRepository.refreshPostList(queryStr)
-    }
-
-
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,8 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import com.maxproj.purebbs.net.HttpApi
-import com.maxproj.purebbs.net.HttpService
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,20 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
-
         val navController = host.navController
-
-        val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.post_dest),
-            drawerLayout)
-
+            drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        val sideNavView = findViewById<NavigationView>(R.id.nav_view)
-        sideNavView?.setupWithNavController(navController)
-
+        nav_view.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

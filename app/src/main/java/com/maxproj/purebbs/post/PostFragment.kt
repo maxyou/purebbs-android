@@ -46,7 +46,6 @@ class PostFragment : Fragment(){
 
         viewModel.postList?.observe(viewLifecycleOwner, Observer {
             Log.d("PureBBS", "Observed postList onChange")
-//            viewModel.postAdapter.data = it
             viewModel.postAdapter.submitList(it)
         })
         return binding
@@ -54,26 +53,4 @@ class PostFragment : Fragment(){
 
 }
 
-//fun mockPostData():List<PostBrief>{
-//    var data =  mutableListOf<PostBrief>()
-//
-//    (0..20).forEach {
-//        data.add(it,
-//            PostBrief(
-//                it.toString(),
-//                "user: $it",
-//                "",
-//                "title $it - ${(100..200).random()}",
-//                "category",
-//                "2020-0519-0510-01-001",
-//                1,
-//                false
-//            )
-//        )
-//        Log.d("PureBBS", "mock post data: $it")
-//    }
-//
-//    println(data)
-//    return data
-//}
 

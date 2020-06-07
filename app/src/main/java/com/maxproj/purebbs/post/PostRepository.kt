@@ -31,31 +31,4 @@ class PostRepository(
                 .build()
         }
 
-    fun refreshPostList(queryStr:String) {
-
-        var data:HttpData.PostListRet
-
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                Log.d("PureBBS", "before httpApi.getPostByPaginate")
-                data = httpApi.getPostByPaginate(queryStr)
-                Log.d("PureBBS", "after httpApi.getPostByPaginate")
-            }catch (he:HttpException){
-                Log.d("PureBBS", "catch HttpException")
-                Log.d("PureBBS", he.toString())
-                return@launch
-            }catch (throwable:Throwable){
-                Log.d("PureBBS", "catch Throwable")
-                Log.d("PureBBS", throwable.toString())
-                return@launch
-            }
-
-            postDao.deleteAllPost()
-            Log.d("PureBBS", "http get: ${data.data}")
-            postDao.insertList(data.data)
-            Log.d("PureBBS", "after postDao insert list")
-
-        }
-    }
-
 }
