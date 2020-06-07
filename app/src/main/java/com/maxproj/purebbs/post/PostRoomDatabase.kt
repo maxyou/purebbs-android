@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.post
 
 import android.content.Context
+import android.util.Log
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
@@ -8,15 +9,21 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class Converters {
-    private val SEPARATOR = ","
+    private val SEPARATOR = " " //这里不能使用Gson().toJson(item)返回的字符串里可能的字符，比如逗号或冒号
 
     @TypeConverter
-    fun toLikeUser(str: String?): List<Post.LikeUser?>? {
-        return str?.split(SEPARATOR)?.map { Post.LikeUser.fromJsonStr(it) }
+    fun strToListLikeUser(str: String?): List<Post.LikeUser?>? {
+        Log.d("PureBBS", "TypeConverter str2ListLikeUser 1:$str")
+        val list = str?.split(SEPARATOR)?.map { Post.LikeUser.fromJsonStr(it) }
+        Log.d("PureBBS", "TypeConverter str2ListLikeUser 2:$list")
+        return list
     }
     @TypeConverter
-    fun fromListLikeUser(listLikeUser: List<Post.LikeUser>): String? {
-        return listLikeUser.map { it.toJsonStr() }.joinToString (separator = SEPARATOR)
+    fun listLikeUserToStr(listLikeUser: List<Post.LikeUser>): String? {
+        Log.d("PureBBS", "TypeConverter listLikeUser2Str 1:${listLikeUser}")
+        val str = listLikeUser.map { it.toJsonStr() }.joinToString (separator = SEPARATOR)
+        Log.d("PureBBS", "TypeConverter listLikeUser2Str 2:$str")
+        return str
     }
     @TypeConverter
     fun toOauth(str: String?): Post.Oauth? {
@@ -56,7 +63,7 @@ abstract class PostRoomDatabase : RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PostRoomDatabase::class.java,
-                    "post_database"
+                    "post_database2"
                 )
                     .addCallback(PostDatabaseCallback(scope))
                     .fallbackToDestructiveMigration() //this will remove all data of last version, just for dev

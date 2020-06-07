@@ -34,7 +34,7 @@ class PostBoundaryCallback(
      * Database returned 0 items. We should query the backend for more items.
      */
     override fun onZeroItemsLoaded() {
-        Log.d("RepoBoundaryCallback", "onZeroItemsLoaded")
+        Log.d("RepoBoundaryCallback", "<PostBoundaryCallback> onZeroItemsLoaded")
         requestAndSaveData()
     }
 
@@ -42,7 +42,7 @@ class PostBoundaryCallback(
      * When all items in the database were loaded, we need to query the backend for more items.
      */
     override fun onItemAtEndLoaded(itemAtEnd: Post) {
-        Log.d("RepoBoundaryCallback", "PagedList --- onItemAtEndLoaded")
+        Log.d("RepoBoundaryCallback", "<PostBoundaryCallback> onItemAtEndLoaded: $itemAtEnd")
         requestAndSaveData()
     }
 
@@ -52,9 +52,9 @@ class PostBoundaryCallback(
 
         viewModelScope.launch(Dispatchers.IO) {
             val postCount = postDao.getPostCount()
-            Log.d("PureBBS", "postDao.getPostCount(): $postCount")
+            Log.d("PureBBS", "<PostBoundaryCallback> getPostCount(): $postCount")
             val query = HttpData.PostListQuery(
-                query = HttpData.PostListQuery.Category("category_dev_web"),
+                query = null,
                 options = HttpData.PostListQuery.Options(
                     offset = postCount,
                     limit = 10,
@@ -63,26 +63,26 @@ class PostBoundaryCallback(
                 )
             )
             val queryStr = Gson().toJson(query)
-            Log.d("PureBBS", "postDao.queryStr: ${queryStr}")
+            Log.d("PureBBS", "<PostBoundaryCallback> queryStr: $queryStr")
             var data:HttpData.PostListRet
             try {
-                Log.d("PureBBS", "before httpApi.getPostByPaginate")
+                Log.d("PureBBS", "<PostBoundaryCallback> before httpApi.getPostByPaginate")
                 data = httpApi.getPostByPaginate(queryStr)
-                Log.d("PureBBS", "after httpApi.getPostByPaginate")
+                Log.d("PureBBS", "<PostBoundaryCallback> after httpApi.getPostByPaginate")
             }catch (he: HttpException){
-                Log.d("PureBBS", "catch HttpException")
+                Log.d("PureBBS", "<PostBoundaryCallback> catch HttpException")
                 Log.d("PureBBS", he.toString())
                 return@launch
             }catch (throwable:Throwable){
-                Log.d("PureBBS", "catch Throwable")
+                Log.d("PureBBS", "<PostBoundaryCallback> catch Throwable")
                 Log.d("PureBBS", throwable.toString())
                 return@launch
             }
 
 //            postDao.deleteAllPost()
-            Log.d("PureBBS", "http get: ${data.data}")
+            Log.d("PureBBS", "<PostBoundaryCallback> http get: ${data.data}")
             postDao.insertList(data.data)
-            Log.d("PureBBS", "after postDao insert list")
+            Log.d("PureBBS", "<PostBoundaryCallback> after postDao insert list")
         }
     }
 }

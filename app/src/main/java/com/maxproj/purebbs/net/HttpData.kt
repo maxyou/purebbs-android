@@ -6,7 +6,7 @@ import com.maxproj.purebbs.post.Post
 class HttpData {
 
     data class PostListQuery(
-        val query:Category,
+        val query:Category?,
         val options:Options
     ){
         data class Category(val category:String)
