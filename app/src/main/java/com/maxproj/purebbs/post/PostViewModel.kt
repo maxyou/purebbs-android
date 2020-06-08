@@ -19,8 +19,6 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         postList = postRepository.postList
     }
 
-    var category:String = "not used"
-
     var postAdapter: PostAdapter = PostAdapter()
 
     fun gotoDetail(view: View){

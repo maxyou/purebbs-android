@@ -7,6 +7,10 @@ object Config {
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
 
+    data class Category(val idStr: String, val name: String)
+    var categories:List<Category>? = null
+    var categoryCurrent:Category? = null
+
     fun calcAvatarPath(
         source: String,
         avatarFileName: String?,
