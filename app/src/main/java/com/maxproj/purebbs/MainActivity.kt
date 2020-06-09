@@ -13,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.maxproj.purebbs.config.CategoryAdapter
 import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.net.HttpData
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,7 +23,7 @@ import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpService
 
 class MainActivity : AppCompatActivity() {
-
+    val adapter = CategoryAdapter()
     private lateinit var appBarConfiguration : AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +48,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initCategory(){
 
+        adapter.lifecycleOwner = this
+        val mock = (0..5).map { Config.Category("aaa","bbb") }
+        adapter.submitList(mock)
+        category.adapter = adapter
+
         Log.d("PureBBS", "<initCategory>")
 
         lifecycleScope.launch {
@@ -65,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 return@launch
             }
 
+            adapter.submitList(data.data.category)
             Config.categories = data.data.category
             Config.categoryCurrent = null
             Log.d("PureBBS", "<initCategory> categories:${Config.categories}")
