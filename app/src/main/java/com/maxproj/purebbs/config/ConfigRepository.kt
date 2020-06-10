@@ -18,7 +18,7 @@ import retrofit2.HttpException
 
 class ConfigRepository(
     private val viewModelScope: CoroutineScope,
-    private val postDao: PostDao,
+    private val configDao: ConfigDao,
     private val httpApi: HttpApi
 ) {
 

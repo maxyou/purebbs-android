@@ -1,5 +1,7 @@
 package com.maxproj.purebbs.config
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.net.URL
 
 object Config {
@@ -7,7 +9,11 @@ object Config {
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
 
-    data class Category(val idStr: String, val name: String)
+    @Entity(tableName = "category_table")
+    data class Category(@PrimaryKey val idStr: String, val name: String)
+    @Entity(tableName = "config_set_table")
+    data class ConfigSet(@PrimaryKey val name: String, val value: String)
+
     var categories:List<Category>? = null
     var categoryCurrent:Category? = null
 

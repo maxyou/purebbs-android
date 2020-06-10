@@ -4,7 +4,6 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
-import androidx.paging.PagedList
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.post.*
 
@@ -14,8 +13,8 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
     val categoryList: LiveData<List<Config.Category>>?
 
     init {
-        val postDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()
-        configRepository = ConfigRepository(viewModelScope, postDao, httpApi)
+        val configDao = MyRoomDatabase.getDatabase(application, viewModelScope).configDao()
+        configRepository = ConfigRepository(viewModelScope, configDao, httpApi)
         categoryList = configRepository.categoryList
     }
 

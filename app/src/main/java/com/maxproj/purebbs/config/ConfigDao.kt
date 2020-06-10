@@ -7,7 +7,7 @@ import androidx.room.*
 @Dao
 interface ConfigDao {
 
-    @Query("SELECT * from config_table ORDER BY idStr ASC")
+    @Query("SELECT * from category_table ORDER BY idStr ASC")
     suspend fun getCategoryList(): List<Config.Category>
 
 }

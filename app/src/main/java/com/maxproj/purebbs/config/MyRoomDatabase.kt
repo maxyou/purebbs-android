@@ -1,10 +1,12 @@
-package com.maxproj.purebbs.post
+package com.maxproj.purebbs.config
 
 import android.content.Context
 import android.util.Log
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
+import com.maxproj.purebbs.post.Post
+import com.maxproj.purebbs.post.PostDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -14,7 +16,11 @@ class Converters {
     @TypeConverter
     fun strToListLikeUser(str: String?): List<Post.LikeUser?>? {
         Log.d("PureBBS", "TypeConverter str2ListLikeUser 1:$str")
-        val list = str?.split(SEPARATOR)?.map { Post.LikeUser.fromJsonStr(it) }
+        val list = str?.split(SEPARATOR)?.map {
+            Post.LikeUser.fromJsonStr(
+                it
+            )
+        }
         Log.d("PureBBS", "TypeConverter str2ListLikeUser 2:$list")
         return list
     }
@@ -43,29 +49,31 @@ class Converters {
     }
 }
 
-@Database(entities = arrayOf(Post::class), version = 16, exportSchema = false)
+@Database(entities = arrayOf(Post::class, Config.Category::class), version = 17, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class PostRoomDatabase : RoomDatabase(){
+abstract class MyRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
+    abstract fun configDao(): ConfigDao
 
     companion object {
         @Volatile
-        private var INSTANCE: PostRoomDatabase? = null
+        private var INSTANCE: MyRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): PostRoomDatabase {
+        ): MyRoomDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
-            return INSTANCE ?: synchronized(this) {
+            return INSTANCE
+                ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    PostRoomDatabase::class.java,
-                    "post_database2"
+                    MyRoomDatabase::class.java,
+                    "purebbs_database"
                 )
-                    .addCallback(PostDatabaseCallback(scope))
+                    .addCallback(DatabaseCallback(scope))
                     .fallbackToDestructiveMigration() //this will remove all data of last version, just for dev
                     .build()
                 INSTANCE = instance
@@ -75,15 +83,22 @@ abstract class PostRoomDatabase : RoomDatabase(){
         }
     }
 
-    private class PostDatabaseCallback(
+    private class DatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var postDao = database.postDao()
 
+                    /**
+                     * 哪些表需要初始化？
+                     * config表？
+                     */
+
+
+
+                    var postDao = database.postDao()
                     postDao.deleteAllPost()// Delete all content here.
                     // Add sample words.
 //                    var postBrief = PostBrief(
