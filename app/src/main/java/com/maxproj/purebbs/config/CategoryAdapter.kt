@@ -8,10 +8,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.databinding.CategoryItemViewBinding
+import com.maxproj.purebbs.post.PostViewModel
 
 
 class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryItemViewHolder>(CATEGORY_COMPARATOR) {
 
+    lateinit var viewModel: ConfigViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
     override fun onCurrentListChanged(
@@ -32,7 +34,7 @@ class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryIte
         Log.d("PureBBS", "CategoryAdapter onBindViewHolder")
         val item = getItem(position)
         Log.d("PureBBS", "CategoryAdapter onBindViewHolder item: $item")
-        holder.bind(item!!)
+        holder.bind(item!!, viewModel)
 //        holder.user.text = item.user
 //        holder.title.text = item.postTitle
         Log.d("PureBBS", "CategoryAdapter onBindViewHolder: $position")
@@ -52,7 +54,8 @@ class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryIte
         init {
             Log.d("PureBBS", "CategoryAdapter onCreateViewHolder init")
         }
-        fun bind(item: Config.Category) {
+        fun bind(item: Config.Category, viewModel:ConfigViewModel) {
+            binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
         }

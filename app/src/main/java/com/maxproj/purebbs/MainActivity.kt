@@ -44,13 +44,14 @@ class MainActivity : AppCompatActivity() {
         nav_view.setupWithNavController(navController)
 
         viewModel.categoryAdapter.lifecycleOwner = this
+        viewModel.categoryAdapter.viewModel = viewModel
         category.adapter = viewModel.categoryAdapter
         viewModel.categoryList?.observe(this, Observer {
             Log.d("PureBBS", "Observed postList onChange")
             viewModel.categoryAdapter.submitList(it)
         })
 
-        viewModel.updateCategory()
+        viewModel.updateCategoryList()
     }
 
     override fun onSupportNavigateUp(): Boolean {

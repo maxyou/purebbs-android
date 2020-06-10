@@ -4,6 +4,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.maxproj.purebbs.config.ConfigViewModel" />
+        <variable
             name="item"
             type="com.maxproj.purebbs.config.Config.Category" />
     </data>
@@ -16,6 +19,7 @@
         <TextView
             android:background="@color/LightGoldenrodYellow"
             android:text="@{item.name}"
+            android:onClick="@{(v)->viewModel.updateCategoryCurrent(v, item.idStr)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

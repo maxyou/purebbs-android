@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.config
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
@@ -9,9 +10,11 @@ import com.maxproj.purebbs.post.*
 
 class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
+
+
     private var configRepository: ConfigRepository
     val categoryList: LiveData<List<Config.Category>>?
-    var categoryCurrent:Config.Category = Config.Category("ids_all","All")
+    var categoryCurrent:String = Config.CATEGORY_ALL
 
     init {
         val configDao = MyRoomDatabase.getDatabase(application, viewModelScope).configDao()
@@ -21,8 +24,12 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
 
     val categoryAdapter = CategoryAdapter()
 
-    fun updateCategory(){
-        configRepository.updateCategory()
+    fun updateCategoryList(){
+        configRepository.updateCategoryList()
+    }
+    fun updateCategoryCurrent(view: View, idStr:String){
+        Log.d("PureBBS", "new category current: $idStr")
+        categoryCurrent = idStr
     }
     fun gotoDetail(view: View){
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())

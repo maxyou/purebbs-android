@@ -8,6 +8,7 @@ object Config {
 //    val BASE_URL: URL = URL("http://192.168.31.70:3001")
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
+    val CATEGORY_ALL:String = "category_all"
 
     @Entity(tableName = "category_table")
     data class Category(@PrimaryKey val idStr: String, val name: String)

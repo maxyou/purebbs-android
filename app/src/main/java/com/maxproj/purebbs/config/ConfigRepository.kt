@@ -25,7 +25,7 @@ class ConfigRepository(
     var categoryList: LiveData<List<Config.Category>>? = configDao.getCategoryList()
 
 
-    fun updateCategory(){
+    fun updateCategoryList(){
         Log.d("PureBBS", "<initCategory>")
 
         viewModelScope.launch {
