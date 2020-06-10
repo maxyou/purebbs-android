@@ -45,7 +45,7 @@ class PostFragment : Fragment(){
         binding.postRecyclerview.adapter = viewModel.postAdapter
 
         viewModel.postList?.observe(viewLifecycleOwner, Observer {
-            Log.d("PureBBS", "Observed postList onChange")
+            Log.d("PureBBS", "<PostBoundaryCallback> Observed PagedList onChange: $it")
             viewModel.postAdapter.submitList(it)
         })
         return binding

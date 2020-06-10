@@ -57,6 +57,7 @@ abstract class MyRoomDatabase : RoomDatabase(){
     abstract fun configDao(): ConfigDao //include config and category
 
     companion object {
+        private val DATABASE_NAME = "purebbs_database2"
         @Volatile
         private var INSTANCE: MyRoomDatabase? = null
 
@@ -71,7 +72,7 @@ abstract class MyRoomDatabase : RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     MyRoomDatabase::class.java,
-                    "purebbs_database"
+                    DATABASE_NAME
                 )
                     .addCallback(DatabaseCallback(scope))
                     .fallbackToDestructiveMigration() //this will remove all data of last version, just for dev
@@ -95,11 +96,8 @@ abstract class MyRoomDatabase : RoomDatabase(){
                      * 哪些表需要初始化？
                      * config表？
                      */
-
-
-
-                    var postDao = database.postDao()
-                    postDao.deleteAllPost()// Delete all content here.
+//                    var postDao = database.postDao()
+//                    postDao.deleteAllPost()// Delete all content here.
                     // Add sample words.
 //                    var postBrief = PostBrief(
 //                        "0",

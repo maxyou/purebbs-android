@@ -1,39 +1,27 @@
 package com.maxproj.purebbs.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.maxproj.purebbs.config.CategoryAdapter
-import com.maxproj.purebbs.config.Config
-import com.maxproj.purebbs.databinding.DetailFragmentBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.maxproj.purebbs.R
 import kotlinx.android.synthetic.main.detail_fragment.*
-import kotlin.text.category
 
 
 class DetailFragment : Fragment() {
-    val adapter = CategoryAdapter()
-    private val viewModel by lazy {
-        ViewModelProvider(activity as AppCompatActivity, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: DetailFragmentBinding = DetailFragmentBinding.inflate(layoutInflater)
-        binding.viewmodel = viewModel
 
-        adapter.lifecycleOwner = this
-        val mock = (0..150).map { Config.Category("aaa","bbb $it") }
-        adapter.submitList(mock)
-        binding.detailRecyclerView.adapter = adapter
+        val v: View = inflater.inflate(R.layout.detail_fragment, container, false)
+        val tv = v.findViewById<TextView>(R.id.textView)
+        tv.setText("detail fragment")
 
-        return binding.root
+        return v
     }
 
 }
