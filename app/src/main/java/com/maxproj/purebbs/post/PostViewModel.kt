@@ -20,6 +20,10 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
 
     var postAdapter: PostAdapter = PostAdapter()
 
+    fun clearPostList(){
+        postRepository.clearPostList()
+    }
+
     fun gotoDetail(view: View){
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
     }

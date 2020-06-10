@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleExtensionsVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleViewmodelKtxVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleLiveDataKtxVersion"
+    implementation "androidx.fragment:fragment-ktx:1.2.4"
 
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"

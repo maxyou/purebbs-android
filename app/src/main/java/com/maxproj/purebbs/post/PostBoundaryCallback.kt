@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.google.gson.Gson
+import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpData
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +55,7 @@ class PostBoundaryCallback(
             val postCount = postDao.getPostCount()
             Log.d("PureBBS", "<PostBoundaryCallback> getPostCount(): $postCount")
             val query = HttpData.PostListQuery(
-                query = null,
+                query = HttpData.PostListQuery.Category(category = Config.categoryCurrent),
                 options = HttpData.PostListQuery.Options(
                     offset = postCount,
                     limit = 10,

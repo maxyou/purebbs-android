@@ -31,4 +31,9 @@ class PostRepository(
                 .build()
         }
 
+    fun clearPostList(){
+        viewModelScope.launch {
+            postDao.deleteAllPost()
+        }
+    }
 }

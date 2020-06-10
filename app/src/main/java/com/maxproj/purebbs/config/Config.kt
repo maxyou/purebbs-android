@@ -2,6 +2,7 @@ package com.maxproj.purebbs.config
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.maxproj.purebbs.post.PostViewModel
 import java.net.URL
 
 object Config {
@@ -9,6 +10,12 @@ object Config {
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
     val CATEGORY_ALL:String = "category_all"
+    var categoryCurrent:String = Config.CATEGORY_ALL
+        set(value) {
+//            val model: PostViewModel by activityViewModels<PostViewModel>()
+
+            field = value
+        }
 
     @Entity(tableName = "category_table")
     data class Category(@PrimaryKey val idStr: String, val name: String)
