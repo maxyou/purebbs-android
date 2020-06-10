@@ -2,7 +2,6 @@ package com.maxproj.purebbs.config
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.lifecycle.LifecycleOwner
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxproj.purebbs.databinding.CategoryItemViewBinding
 
 
-class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryItemViewHolder>(REPO_COMPARATOR) {
+class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryItemViewHolder>(CATEGORY_COMPARATOR) {
 
     lateinit var lifecycleOwner: LifecycleOwner
 
@@ -59,7 +58,7 @@ class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryIte
         }
     }
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Config.Category>() {
+        private val CATEGORY_COMPARATOR = object : DiffUtil.ItemCallback<Config.Category>() {
             override fun areItemsTheSame(oldItem: Config.Category, newItem: Config.Category): Boolean =
                 oldItem.idStr == newItem.idStr
 
