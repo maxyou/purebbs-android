@@ -11,6 +11,7 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
 
     private var configRepository: ConfigRepository
     val categoryList: LiveData<List<Config.Category>>?
+    var categoryCurrent:Config.Category = Config.Category("ids_all","All")
 
     init {
         val configDao = MyRoomDatabase.getDatabase(application, viewModelScope).configDao()
@@ -18,8 +19,11 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
         categoryList = configRepository.categoryList
     }
 
-    val adapter = CategoryAdapter()
+    val categoryAdapter = CategoryAdapter()
 
+    fun updateCategory(){
+        configRepository.updateCategory()
+    }
     fun gotoDetail(view: View){
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
     }

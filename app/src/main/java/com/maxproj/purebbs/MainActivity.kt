@@ -4,28 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
-import com.maxproj.purebbs.config.CategoryAdapter
-import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.config.ConfigViewModel
 import com.maxproj.purebbs.config.ConfigViewModelFactory
-import com.maxproj.purebbs.net.HttpData
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import retrofit2.HttpException
-import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.net.HttpService
-import com.maxproj.purebbs.post.PostViewModel
-import com.maxproj.purebbs.post.PostViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,22 +43,14 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
 
-        viewModel.adapter.lifecycleOwner = this
-        category.adapter = viewModel.adapter
+        viewModel.categoryAdapter.lifecycleOwner = this
+        category.adapter = viewModel.categoryAdapter
+        viewModel.categoryList?.observe(this, Observer {
+            Log.d("PureBBS", "Observed postList onChange")
+            viewModel.categoryAdapter.submitList(it)
+        })
 
-    }
-
-    private fun initCategory(){
-
-
-
-
-//        runBlocking{
-//            coroutineScope{
-//            }
-//            withContext(Dispatchers.IO){
-//            }
-//        }
+        viewModel.updateCategory()
     }
 
     override fun onSupportNavigateUp(): Boolean {

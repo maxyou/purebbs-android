@@ -22,10 +22,10 @@ class ConfigRepository(
     private val httpApi: HttpApi
 ) {
 
-    var categoryList: LiveData<List<Config.Category>>? = null
+    var categoryList: LiveData<List<Config.Category>>? = configDao.getCategoryList()
 
 
-    fun update(){
+    fun updateCategory(){
         Log.d("PureBBS", "<initCategory>")
 
         viewModelScope.launch {
@@ -44,11 +44,9 @@ class ConfigRepository(
                 return@launch
             }
 
-//            adapter.submitList(data.data.category)
-            Config.categories = data.data.category
-            Config.categoryCurrent = null
-            Log.d("PureBBS", "<initCategory> categories:${Config.categories}")
-        }
+            Log.d("PureBBS", "<initCategory> categories:${data.data.category}")
+            configDao.insertList(data.data.category)
 
+        }
     }
 }

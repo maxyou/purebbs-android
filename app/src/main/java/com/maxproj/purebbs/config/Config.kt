@@ -14,8 +14,8 @@ object Config {
     @Entity(tableName = "config_set_table")
     data class ConfigSet(@PrimaryKey val name: String, val value: String)
 
-    var categories:List<Category>? = null
-    var categoryCurrent:Category? = null
+//    var categories:List<Category>? = null
+//    var categoryCurrent:Category? = null
 
     fun calcAvatarPath(
         source: String,

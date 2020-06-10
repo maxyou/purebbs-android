@@ -54,7 +54,7 @@ class Converters {
 abstract class MyRoomDatabase : RoomDatabase(){
 
     abstract fun postDao(): PostDao
-    abstract fun configDao(): ConfigDao
+    abstract fun configDao(): ConfigDao //include config and category
 
     companion object {
         @Volatile
