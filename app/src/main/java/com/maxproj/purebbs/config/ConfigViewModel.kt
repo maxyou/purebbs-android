@@ -31,7 +31,8 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
         Log.d("PureBBS", "new category current: $idStr")
         categoryCurrent = idStr
         viewModelScope.launch {
-            postDao.deleteAllPost()        
+            Log.d("PureBBS", "postDao.deleteAllPost()")
+            postDao.deleteAllPost()
         }
     }
     fun gotoDetail(view: View){

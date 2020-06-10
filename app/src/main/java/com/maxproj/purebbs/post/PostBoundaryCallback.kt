@@ -55,7 +55,7 @@ class PostBoundaryCallback(
             val postCount = postDao.getPostCount()
             Log.d("PureBBS", "<PostBoundaryCallback> getPostCount(): $postCount")
             val query = HttpData.PostListQuery(
-                query = HttpData.PostListQuery.Category(category = Config.categoryCurrent),
+                query = if(Config.categoryCurrent == Config.CATEGORY_ALL) null else HttpData.PostListQuery.Category(category = Config.categoryCurrent),
                 options = HttpData.PostListQuery.Options(
                     offset = postCount,
                     limit = 10,
