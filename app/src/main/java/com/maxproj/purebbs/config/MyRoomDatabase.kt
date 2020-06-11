@@ -57,7 +57,7 @@ abstract class MyRoomDatabase : RoomDatabase(){
     abstract fun configDao(): ConfigDao //include config and category
 
     companion object {
-        private val DATABASE_NAME = "purebbs_database2"
+        private val DATABASE_NAME = "purebbs_database3"
         @Volatile
         private var INSTANCE: MyRoomDatabase? = null
 
