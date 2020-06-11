@@ -52,9 +52,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.categoryAdapter.submitList(it)
         })
         Config.categoryCurrentLive.observe(this, Observer {
-            viewModel.liveCategory(it)
+            viewModel.currentCategoryChanged(it)
         })
         viewModel.updateCategoryList()
+        viewModel.mDrawerLayout = drawer_layout
     }
 
     override fun onSupportNavigateUp(): Boolean {

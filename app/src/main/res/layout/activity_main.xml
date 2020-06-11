@@ -16,8 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#c7fca2"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:background="@color/LightGreen"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
 
         <fragment
             android:id="@+id/nav_host_fragment"
@@ -43,7 +43,6 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category"
                 android:layout_margin="20dp"
-                android:background="@color/FloralWhite"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

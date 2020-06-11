@@ -12,22 +12,24 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/Orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:text="@{item.name}"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:layout_marginBottom="2dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:gravity="start|center_vertical"
             android:onClick="@{(v)->viewModel.updateCategoryCurrent(v, item.idStr)}"
             app:selectedCategory="@{item}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:gravity="start"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="40dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

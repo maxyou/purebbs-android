@@ -86,7 +86,9 @@ fun loadImag2e(view: ImageView, item: Post?) {
             isMyself = false
         )
         Log.d("PureBBS", "image path: $path")
-        Glide.with(view.context).load("${path}").into(view)
+        Glide.with(view.context).load("${path}")
+            .circleCrop()
+            .into(view)
     }
 }
 

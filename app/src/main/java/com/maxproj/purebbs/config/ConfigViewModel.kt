@@ -3,6 +3,7 @@ package com.maxproj.purebbs.config
 import android.app.Application
 import android.util.Log
 import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
 import com.maxproj.purebbs.net.HttpApi
@@ -14,6 +15,7 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
     val categoryList: LiveData<List<Config.Category>>?
     val configDao:ConfigDao = MyRoomDatabase.getDatabase(application, viewModelScope).configDao()
     val postDao:PostDao = MyRoomDatabase.getDatabase(application, viewModelScope).postDao()
+    lateinit var mDrawerLayout:DrawerLayout
 
     init {
         configRepository = ConfigRepository(viewModelScope, configDao, httpApi)
@@ -27,14 +29,11 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
     }
     fun updateCategoryCurrent(view: View, idStr:String){
         Log.d("PureBBS", "new category current: $idStr")
-//        categoryCurrent = idStr
-//        viewModelScope.launch {
-//            Log.d("PureBBS", "postDao.deleteAllPost()")
-//            postDao.deleteAllPost()
-//        }
         Config._categoryCurrentLive.value = idStr
+
+        mDrawerLayout.closeDrawers()
     }
-    fun liveCategory(it: String) {
+    fun currentCategoryChanged(it: String) {
         categoryAdapter.notifyDataSetChanged()
     }
     fun gotoDetail(view: View){
