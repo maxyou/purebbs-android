@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.config.ConfigViewModel
 import com.maxproj.purebbs.config.ConfigViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,7 +51,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("PureBBS", "Observed postList onChange")
             viewModel.categoryAdapter.submitList(it)
         })
-
+        Config.categoryCurrentLive.observe(this, Observer {
+            viewModel.liveCategory(it)
+        })
         viewModel.updateCategoryList()
     }
 

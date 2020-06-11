@@ -25,7 +25,7 @@
             android:layout_margin="2dp"
             android:background="@color/Turquoise"
             android:gravity="center"
-            app:imageUrl="@{item}"
+            app:imageUr2l="@{item}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/title"
             app:layout_constraintStart_toStartOf="parent"

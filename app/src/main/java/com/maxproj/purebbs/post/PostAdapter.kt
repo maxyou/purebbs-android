@@ -72,8 +72,8 @@ class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_
     }
 }
 
-@BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, item: Post?) {
+@BindingAdapter("app:imageUr2l")
+fun loadImag2e(view: ImageView, item: Post?) {
 
     Log.d("PureBBS", "loadImage .... ${item?.toString()}")
 

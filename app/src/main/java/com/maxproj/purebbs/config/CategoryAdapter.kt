@@ -1,13 +1,19 @@
 package com.maxproj.purebbs.config
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.maxproj.purebbs.databinding.CategoryItemViewBinding
+import com.maxproj.purebbs.post.Post
 import com.maxproj.purebbs.post.PostViewModel
 
 
@@ -68,5 +74,22 @@ class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryIte
             override fun areContentsTheSame(oldItem: Config.Category, newItem: Config.Category): Boolean =
                 oldItem == newItem
         }
+    }
+}
+
+@BindingAdapter("app:selectedCategory")
+fun selectedCategory(view: TextView, item: Config.Category?) {
+    Log.d("PureBBS", "<selectedCategory> item.toString: ${item?.toString()}")
+
+    if (item != null) {
+        Log.d("PureBBS","<selectedCategory> item.idStr:${item.idStr}, currentLive.value:${Config.categoryCurrentLive.value}")
+        if(item.idStr == Config.categoryCurrentLive.value) {
+            Log.d("PureBBS","<selectedCategory> found item.idStr == Config.categoryCurrentLive.value")
+            view.setBackgroundColor(Color.YELLOW)
+        }else{
+            Log.d("PureBBS","<selectedCategory> found item.idStr != Config.categoryCurrentLive.value")
+            view.setBackgroundColor(Color.WHITE)
+        }
+        view.invalidate()
     }
 }
