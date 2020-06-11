@@ -24,8 +24,8 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         postRepository.changeCategory(category)
     }
 
-    fun gotoDetail(view: View){
-        Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
+    fun gotoDetail(view: View, item:Post){
+        Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest(postId = item.postId))
     }
 
 }

@@ -36,9 +36,6 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
     fun currentCategoryChanged(it: String) {
         categoryAdapter.notifyDataSetChanged()
     }
-    fun gotoDetail(view: View){
-        Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())
-    }
 
 }
 

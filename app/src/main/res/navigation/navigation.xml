@@ -22,7 +22,9 @@
         android:label="@string/detail_fragment"
         android:name="com.maxproj.purebbs.detail.DetailFragment"
         tools:layout="@layout/detail_fragment">
-
+        <argument
+            android:name="postId"
+            app:argType="string"/>
     </fragment>
 
 
