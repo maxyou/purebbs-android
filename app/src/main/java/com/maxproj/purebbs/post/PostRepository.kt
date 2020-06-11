@@ -35,16 +35,18 @@ class PostRepository(
                 .build()
         }
 
-    suspend fun httpGetMore(): HttpData.PostListRet?{
+    private suspend fun httpGetMore(): HttpData.PostListRet?{
 
         var data: HttpData.PostListRet? = null
 
         val postCount = postDao.getPostCount()
         Log.d("PureBBS", "<PostBoundaryCallback> getPostCount(): $postCount")
         val query = HttpData.PostListQuery(
-            query = if (Config.categoryCurrent == Config.CATEGORY_ALL) null else HttpData.PostListQuery.Category(
-                category = Config.categoryCurrent
-            ),
+            query = if (Config.categoryCurrentLive.value == Config.CATEGORY_ALL || Config.categoryCurrentLive.value == null)
+                        null //category of all
+                    else HttpData.PostListQuery.Category(
+                        category = Config.categoryCurrentLive.value!!
+                        ),
             options = HttpData.PostListQuery.Options(
                 offset = postCount,
                 limit = 10,
@@ -70,28 +72,26 @@ class PostRepository(
         return data
     }
 
-    fun postBoundaryGetMore(){
+    private fun postBoundaryGetMore(){
         viewModelScope.launch(Dispatchers.IO) {
             val data = httpGetMore()
             if(data != null){
-                databaseAppendPostList(data.data)
+                postDao.insertList(data.data)
             }
         }
     }
 
-    suspend fun databaseClearPostList(){
-        postDao.deleteAllPost()
-    }
-    suspend fun databaseAppendPostList(list:List<Post>){
-        postDao.insertList(list)
-    }
-
-    fun refreshPostList(){
+    fun changeCategory(category:String){
         viewModelScope.launch(Dispatchers.IO) {
-            val data = httpGetMore()
-            if(data != null){
-                databaseAppendPostList(data.data)
+            if(postDao.getPostCount() == 0){
+                val data = httpGetMore()
+                if(data != null){
+                    postDao.insertList(data.data)
+                }
+            }else{
+                postDao.deleteAllPost()
             }
         }
     }
+
 }

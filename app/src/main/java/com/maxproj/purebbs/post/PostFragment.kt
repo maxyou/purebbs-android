@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.maxproj.purebbs.config.Config.categoryCurrentLive
 import com.maxproj.purebbs.databinding.PostFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
@@ -47,6 +47,9 @@ class PostFragment : Fragment(){
         viewModel.postList?.observe(viewLifecycleOwner, Observer {
             Log.d("PureBBS", "<PostBoundaryCallback> Observed PagedList onChange: $it")
             viewModel.postAdapter.submitList(it)
+        })
+        categoryCurrentLive.observe(viewLifecycleOwner, Observer {
+            viewModel.changeCategory(it)
         })
         return binding
     }

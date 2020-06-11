@@ -5,10 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
-import com.maxproj.purebbs.config.Config.categoryCurrent
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.post.*
-import kotlinx.coroutines.launch
 
 class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
@@ -29,11 +27,12 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
     }
     fun updateCategoryCurrent(view: View, idStr:String){
         Log.d("PureBBS", "new category current: $idStr")
-        categoryCurrent = idStr
-        viewModelScope.launch {
-            Log.d("PureBBS", "postDao.deleteAllPost()")
-            postDao.deleteAllPost()
-        }
+//        categoryCurrent = idStr
+//        viewModelScope.launch {
+//            Log.d("PureBBS", "postDao.deleteAllPost()")
+//            postDao.deleteAllPost()
+//        }
+        Config._categoryCurrentLive.value = idStr
     }
     fun gotoDetail(view: View){
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest())

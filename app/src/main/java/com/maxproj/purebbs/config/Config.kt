@@ -1,21 +1,26 @@
 package com.maxproj.purebbs.config
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.maxproj.purebbs.post.PostViewModel
 import java.net.URL
+import java.util.*
+import kotlin.properties.Delegates
 
 object Config {
 //    val BASE_URL: URL = URL("http://192.168.31.70:3001")
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
     val CATEGORY_ALL:String = "category_all"
-    var categoryCurrent:String = Config.CATEGORY_ALL
-        set(value) {
-//            val model: PostViewModel by activityViewModels<PostViewModel>()
+//    var categoryCurrent:String = Config.CATEGORY_ALL
 
-            field = value
-        }
+    val _categoryCurrentLive: MutableLiveData<String> by lazy {
+        MutableLiveData<String>(Config.CATEGORY_ALL)
+    }
+    val categoryCurrentLive: LiveData<String>
+        get() = _categoryCurrentLive
 
     @Entity(tableName = "category_table")
     data class Category(@PrimaryKey val idStr: String, val name: String)
