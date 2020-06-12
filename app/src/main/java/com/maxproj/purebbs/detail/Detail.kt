@@ -1,4 +1,4 @@
-package com.maxproj.purebbs.post
+package com.maxproj.purebbs.detail
 
 import android.util.Log
 import androidx.room.Entity
@@ -6,11 +6,10 @@ import androidx.room.PrimaryKey
 import com.google.gson.Gson
 import com.maxproj.purebbs.config.LikeUser
 import com.maxproj.purebbs.config.Oauth
-import java.io.Serializable
-import java.util.*
 
-@Entity(tableName = "post_table")
-data class Post (
+
+@Entity(tableName = "detail_table")
+data class Detail (
     @PrimaryKey var _id:String,
     val author:String = "unknow",
     val authorId:String = "-1",

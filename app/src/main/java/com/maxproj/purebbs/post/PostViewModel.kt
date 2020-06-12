@@ -29,3 +29,12 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
     }
 
 }
+
+class PostViewModelFactory (private val application: Application, private val httpApi: HttpApi) : ViewModelProvider.Factory{
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(PostViewModel::class.java)) {
+            return PostViewModel(application, httpApi) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}

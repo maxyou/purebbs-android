@@ -1,24 +1,17 @@
-package com.maxproj.purebbs.post
+package com.maxproj.purebbs.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
-import com.google.gson.Gson
-import com.maxproj.purebbs.config.Config
-import com.maxproj.purebbs.net.HttpApi
-import com.maxproj.purebbs.net.HttpData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import com.maxproj.purebbs.detail.Detail
 
-class PostBoundaryCallback(
+class DetailBoundaryCallback(
 //    private val viewModelScope: CoroutineScope,
 //    private val httpApi: HttpApi,
-//    private val postDao: PostDao,
+//    private val detailDao: DetailDao,
     val boundaryGetMore:()->Unit
-) : PagedList.BoundaryCallback<Post>() {
+) : PagedList.BoundaryCallback<Detail>() {
 
     companion object{
         private const val NETWORK_PAGE_SIZE = 20
@@ -36,15 +29,15 @@ class PostBoundaryCallback(
      * Database returned 0 items. We should query the backend for more items.
      */
     override fun onZeroItemsLoaded() {
-        Log.d("RepoBoundaryCallback", "<PostBoundaryCallback> onZeroItemsLoaded")
+        Log.d("RepoBoundaryCallback", "<DetailBoundaryCallback> onZeroItemsLoaded")
         boundaryGetMore()
     }
 
     /**
      * When all items in the database were loaded, we need to query the backend for more items.
      */
-    override fun onItemAtEndLoaded(itemAtEnd: Post) {
-        Log.d("RepoBoundaryCallback", "<PostBoundaryCallback> onItemAtEndLoaded: $itemAtEnd")
+    override fun onItemAtEndLoaded(itemAtEnd: Detail) {
+        Log.d("RepoBoundaryCallback", "<DetailBoundaryCallback> onItemAtEndLoaded: $itemAtEnd")
         boundaryGetMore()
     }
 

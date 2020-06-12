@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.maxproj.purebbs.post.PostViewModel" />
+            type="com.maxproj.purebbs.detail.DetailViewModel" />
 
         <variable
             name="item"
-            type="com.maxproj.purebbs.post.Post" />
+            type="com.maxproj.purebbs.detail.Detail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +69,6 @@
             android:gravity="center"
             android:text="->"
             android:textSize="12sp"
-            android:onClick="@{(v)->viewModel.gotoDetail(v, item)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/reply"

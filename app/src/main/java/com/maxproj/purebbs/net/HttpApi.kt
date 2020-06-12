@@ -13,6 +13,12 @@ import java.util.*
  */
 interface HttpApi {
 
+    @GET("detail/getpage")
+    suspend fun getDetailByPaginate(
+        @Query("pageInfo") pageInfo: String
+    ): HttpData.DetailListRet
+
+
     @GET("post/getpage")
     suspend fun getPostByPaginate(
         @Query("pageInfo") pageInfo: String

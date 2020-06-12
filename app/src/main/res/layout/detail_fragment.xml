@@ -5,23 +5,23 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.maxproj.purebbs.detail.DetailViewModel" />
     </data>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/detailRecyclerView"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:background="@color/FloralWhite"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_width="match_parent"-->
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/detail_recyclerview"
+        android:layout_margin="20dp"
+        android:background="@color/FloralWhite"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </layout>

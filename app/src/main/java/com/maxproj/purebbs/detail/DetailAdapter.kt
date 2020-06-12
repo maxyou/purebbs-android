@@ -1,4 +1,4 @@
-package com.maxproj.purebbs.post
+package com.maxproj.purebbs.detail
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,50 +11,41 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maxproj.purebbs.config.Config
-import com.maxproj.purebbs.databinding.PostItemViewBinding
+import com.maxproj.purebbs.databinding.DetailItemViewBinding
+import com.maxproj.purebbs.detail.Detail
+import com.maxproj.purebbs.detail.DetailAdapter
+import com.maxproj.purebbs.detail.DetailViewModel
+import com.maxproj.purebbs.post.Post
 
+class DetailAdapter : PagedListAdapter<Detail, DetailAdapter.DetailItemViewHolder>(REPO_COMPARATOR) {
 
-class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_COMPARATOR) {
-
-    lateinit var viewModel: PostViewModel
+    lateinit var viewModel: DetailViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
-//    var data = listOf<Post>()
-//        set(value) {
-//            Log.d("PureBBS", "adapter post data: $value")
-//            field = value
-//            notifyDataSetChanged()
-//        }
-//
-//    override fun getItemCount(): Int {
-//        Log.d("PureBBS", "adapter get data size: ${data.size}")
-//        return data.size
-//    }
-
-    override fun onBindViewHolder(holder: PostItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailItemViewHolder, position: Int) {
         Log.d("PureBBS", "adapter onBindViewHolder")
         val item = getItem(position)
         Log.d("PureBBS", "adapter onBindViewHolder item: $item")
         holder.bind(item!!, viewModel)
 //        holder.user.text = item.user
-//        holder.title.text = item.postTitle
+//        holder.title.text = item.detailTitle
         Log.d("PureBBS", "adapter onBindViewHolder: $position")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailItemViewHolder {
 
         val binding =
-            PostItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            DetailItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         binding.lifecycleOwner = lifecycleOwner
 
-        return PostItemViewHolder(binding)
+        return DetailItemViewHolder(binding)
     }
 
-    class PostItemViewHolder(val binding: PostItemViewBinding) :
+    class DetailItemViewHolder(val binding: DetailItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Post, viewModel: PostViewModel) {
+        fun bind(item: Detail, viewModel: DetailViewModel) {
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
@@ -62,18 +53,18 @@ class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
-            override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Detail>() {
+            override fun areItemsTheSame(oldItem: Detail, newItem: Detail): Boolean =
                 oldItem._id == newItem._id
 
-            override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+            override fun areContentsTheSame(oldItem: Detail, newItem: Detail): Boolean =
                 oldItem == newItem
         }
     }
 }
 
 @BindingAdapter("app:imageUrl")
-fun loadImage(view: ImageView, item: Post?) {
+fun loadImage(view: ImageView, item: Detail?) {
 
     Log.d("PureBBS", "loadImage .... ${item?.toString()}")
 
@@ -91,4 +82,3 @@ fun loadImage(view: ImageView, item: Post?) {
             .into(view)
     }
 }
-
