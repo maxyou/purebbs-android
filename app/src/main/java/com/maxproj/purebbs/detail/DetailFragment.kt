@@ -25,31 +25,28 @@ class DetailFragment : Fragment() {
         ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(DetailViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-//        val safeArgs: DetailFragmentArgs by navArgs()
-//        val detailId = safeArgs.detailId
-//
-//        val v: View = inflater.inflate(R.layout.detail_fragment, container, false)
-//        val tv = v.findViewById<TextView>(R.id.textView)
-//        tv.setText("detailId: $detailId")
-//
-//        return v
+        Log.d("PureBBS","<detail> onCreateView")
         val binding: DetailFragmentBinding = bindingViewModelInit()
-
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("PureBBS","<detail> onResume")
+        val safeArgs: DetailFragmentArgs by navArgs()
+        viewModel.changePostId(safeArgs.postId)
+    }
 
     private fun bindingViewModelInit(): DetailFragmentBinding {
 
         val binding: DetailFragmentBinding = DetailFragmentBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
 
-        //        viewModel.detailAdapter.data = mockDetailData()
         viewModel.detailAdapter.viewModel = viewModel
         viewModel.detailAdapter.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -57,12 +54,9 @@ class DetailFragment : Fragment() {
         binding.detailRecyclerview.adapter = viewModel.detailAdapter
 
         viewModel.detailList?.observe(viewLifecycleOwner, Observer {
-            Log.d("PureBBS", "<DetailBoundaryCallback> Observed PagedList onChange: $it")
+            Log.d("PureBBS","<detail> DetailFragment viewModel.detailAdapter.submitList:$it")
             viewModel.detailAdapter.submitList(it)
         })
-//        Config.categoryCurrentLive.observe(viewLifecycleOwner, Observer {
-//            viewModel.changeCategory(it)
-//        })
         return binding
     }
 }

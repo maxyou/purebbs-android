@@ -9,8 +9,9 @@ import com.maxproj.purebbs.post.Post
 interface ConfigDao {
 
     @Query("SELECT * from category_table ORDER BY idStr ASC")
-    fun getCategoryList(): LiveData<List<Config.Category>>
+    fun getCategoryList(): LiveData<List<Category>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertList( list: List<Config.Category>)
+    suspend fun insertList( list: List<Category>)
+
 }

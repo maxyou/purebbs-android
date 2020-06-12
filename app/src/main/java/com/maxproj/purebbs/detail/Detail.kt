@@ -18,19 +18,19 @@ data class Detail (
     val anonymous:Boolean = false,
     val source:String = "register",
     val oauth: Oauth?,
-    val title:String? = "no title",
+//    val title:String? = "no title",
     val content:String? = "no content",
-    val category: String,
+//    val category: String,
     val updated: String?,
     val created:String?,
-    val commentNum:Int? = 0,
-    val likeUser:List<LikeUser?>?,
-    val lastReplyId: String?,
-    val lastReplyName: String?,
-    val lastReplyTime: String?,
+//    val commentNum:Int? = 0,
+//    val likeUser:List<LikeUser?>?,
+//    val lastReplyId: String?,
+//    val lastReplyName: String?,
+//    val lastReplyTime: String?,
     val updatedById: String?,
-    val updatedByName: String?,
-    val allUpdated: String?,
-    val stickTop:Boolean? = false
+    val updatedByName: String?
+//    val allUpdated: String?,
+//    val stickTop:Boolean? = false
 //    val extend: Extend
 )

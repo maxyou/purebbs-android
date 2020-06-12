@@ -22,11 +22,6 @@ object Config {
     val categoryCurrentLive: LiveData<String>
         get() = _categoryCurrentLive
 
-    @Entity(tableName = "category_table")
-    data class Category(@PrimaryKey val idStr: String, val name: String)
-    @Entity(tableName = "config_set_table")
-    data class ConfigSet(@PrimaryKey val name: String, val value: String)
-
 //    var categories:List<Category>? = null
 //    var categoryCurrent:Category? = null
 

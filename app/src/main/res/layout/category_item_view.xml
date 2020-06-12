@@ -8,7 +8,7 @@
             type="com.maxproj.purebbs.config.ConfigViewModel" />
         <variable
             name="item"
-            type="com.maxproj.purebbs.config.Config.Category" />
+            type="com.maxproj.purebbs.config.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

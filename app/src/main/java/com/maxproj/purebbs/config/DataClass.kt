@@ -1,7 +1,14 @@
 package com.maxproj.purebbs.config
 
 import android.util.Log
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.Gson
+
+@Entity(tableName = "category_table")
+data class Category(@PrimaryKey val idStr: String, val name: String)
+@Entity(tableName = "config_set_table")
+data class ConfigSet(@PrimaryKey val name: String, val value: String)
 
 data class Oauth(val avatarUrl:String)
 data class LikeUser(val _id: String, val name:String){

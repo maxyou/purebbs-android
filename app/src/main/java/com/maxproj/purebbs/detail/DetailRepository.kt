@@ -25,11 +25,12 @@ class DetailRepository (
         private const val DATABASE_PAGE_SIZE = 10
     }
 
+    var postId:String? = null
+
     val detailList: LiveData<PagedList<Detail>>?
         get() {
             val dataSourceFactory = detailDao.getDetailDataSource()
 
-//            val boundaryCallback = DetailBoundaryCallback(viewModelScope, httpApi, detailDao)
             val boundaryCallback = DetailBoundaryCallback(::detailBoundaryGetMore)
 
             return LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE)
@@ -42,48 +43,51 @@ class DetailRepository (
         var data: HttpData.DetailListRet? = null
 
         val detailCount = detailDao.getDetailCount()
-        Log.d("PureBBS", "<DetailBoundaryCallback> getDetailCount(): $detailCount")
+        Log.d("PureBBS", "<detail> getDetailCount(): $detailCount")
         val query = HttpData.DetailListQuery(
-            query = if (Config.categoryCurrentLive.value == Config.CATEGORY_ALL || Config.categoryCurrentLive.value == null)
-                null //category of all
-            else HttpData.DetailListQuery.Category(
-                category = Config.categoryCurrentLive.value!!
-            ),
+            query = HttpData.DetailListQuery.PostID(postId = postId!!),
             options = HttpData.DetailListQuery.Options(
                 offset = detailCount,
                 limit = 10,
                 sort = HttpData.DetailListQuery.Options.Sort(allUpdated = -1),
-                select = "source oauth title detailId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
+                select = "postId content author authorId updated created avatarFileName likeUser anonymous source oauth"
             )
         )
         val queryStr = Gson().toJson(query)
-        Log.d("PureBBS", "<DetailBoundaryCallback> queryStr: $queryStr")
+        Log.d("PureBBS", "<detail> queryStr: $queryStr")
         try {
-            Log.d("PureBBS", "<DetailBoundaryCallback> before httpApi.getDetailByPaginate")
+            Log.d("PureBBS", "<detail> before httpApi.getDetailByPaginate")
             data = httpApi.getDetailByPaginate(queryStr)
-            Log.d("PureBBS", "<DetailBoundaryCallback> after httpApi.getDetailByPaginate")
+            Log.d("PureBBS", "<detail> after httpApi.getDetailByPaginate")
         } catch (he: HttpException) {
-            Log.d("PureBBS", "<DetailBoundaryCallback> catch HttpException")
+            Log.d("PureBBS", "<detail> catch HttpException")
             Log.d("PureBBS", he.toString())
 
         } catch (throwable: Throwable) {
-            Log.d("PureBBS", "<DetailBoundaryCallback> catch Throwable")
+            Log.d("PureBBS", "<detail> catch Throwable")
             Log.d("PureBBS", throwable.toString())
 
         }
+        Log.d("PureBBS", "<detail> get data: $data")
         return data
     }
 
     private fun detailBoundaryGetMore(){
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("PureBBS", "<detail> before get more")
             val data = httpGetMore()
+            Log.d("PureBBS", "<detail> after get more")
             if(data != null){
+                Log.d("PureBBS", "<detail> detailDao.insertList():${data.data}")
                 detailDao.insertList(data.data)
+                Log.d("PureBBS", "<detail> detailDao.insertList() end")
             }
         }
     }
 
-    fun changeCategory(category:String){
+    fun changePostId(postId:String){
+        Log.d("PureBBS","<detail> DetailRepository changePostId()")
+        this.postId = postId
         viewModelScope.launch(Dispatchers.IO) {
             if(detailDao.getDetailCount() == 0){
                 val data = httpGetMore()
@@ -95,5 +99,4 @@ class DetailRepository (
             }
         }
     }
-
 }

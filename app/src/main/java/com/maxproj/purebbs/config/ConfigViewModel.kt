@@ -12,7 +12,7 @@ import com.maxproj.purebbs.post.*
 class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
 
     private var configRepository: ConfigRepository
-    val categoryList: LiveData<List<Config.Category>>?
+    val categoryList: LiveData<List<Category>>?
     val configDao:ConfigDao = MyRoomDatabase.getDatabase(application, viewModelScope).configDao()
     val postDao:PostDao = MyRoomDatabase.getDatabase(application, viewModelScope).postDao()
     lateinit var mDrawerLayout:DrawerLayout

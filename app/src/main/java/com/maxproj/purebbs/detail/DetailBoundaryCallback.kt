@@ -29,7 +29,7 @@ class DetailBoundaryCallback(
      * Database returned 0 items. We should query the backend for more items.
      */
     override fun onZeroItemsLoaded() {
-        Log.d("RepoBoundaryCallback", "<DetailBoundaryCallback> onZeroItemsLoaded")
+        Log.d("RepoBoundaryCallback", "<detail> onZeroItemsLoaded")
         boundaryGetMore()
     }
 
@@ -37,7 +37,7 @@ class DetailBoundaryCallback(
      * When all items in the database were loaded, we need to query the backend for more items.
      */
     override fun onItemAtEndLoaded(itemAtEnd: Detail) {
-        Log.d("RepoBoundaryCallback", "<DetailBoundaryCallback> onItemAtEndLoaded: $itemAtEnd")
+        Log.d("RepoBoundaryCallback", "<detail> onItemAtEndLoaded: $itemAtEnd")
         boundaryGetMore()
     }
 

@@ -22,7 +22,7 @@ class ConfigRepository(
     private val httpApi: HttpApi
 ) {
 
-    var categoryList: LiveData<List<Config.Category>>? = configDao.getCategoryList()
+    var categoryList: LiveData<List<Category>>? = configDao.getCategoryList()
 
 
     fun updateCategoryList(){

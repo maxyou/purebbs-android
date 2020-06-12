@@ -1,6 +1,7 @@
 package com.maxproj.purebbs.detail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,21 +15,23 @@ import com.maxproj.purebbs.detail.DetailRepository
 import com.maxproj.purebbs.detail.DetailViewModel
 
 class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() {
-    // TODO: Implement the ViewModel
 
+    var postId:String? = null
     private var detailRepository: DetailRepository
     val detailList: LiveData<PagedList<Detail>>?
 
     init {
+        Log.d("PureBBS","<detail> DetailViewModel init{}")
         val detailDao = MyRoomDatabase.getDatabase(application, viewModelScope).detailDao()
         detailRepository = DetailRepository(viewModelScope, detailDao, httpApi)
         detailList = detailRepository.detailList
     }
 
     var detailAdapter: DetailAdapter = DetailAdapter()
-    
-    
-    
+
+    fun changePostId(postId:String){
+        detailRepository.changePostId(postId)
+    }
 }
 
 class DetailViewModelFactory (private val application: Application, private val httpApi: HttpApi) : ViewModelProvider.Factory{

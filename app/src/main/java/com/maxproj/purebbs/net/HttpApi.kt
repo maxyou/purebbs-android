@@ -13,7 +13,7 @@ import java.util.*
  */
 interface HttpApi {
 
-    @GET("detail/getpage")
+    @GET("detail/comment/getpage")
     suspend fun getDetailByPaginate(
         @Query("pageInfo") pageInfo: String
     ): HttpData.DetailListRet

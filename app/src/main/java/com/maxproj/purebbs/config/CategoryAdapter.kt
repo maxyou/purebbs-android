@@ -17,14 +17,14 @@ import com.maxproj.purebbs.post.Post
 import com.maxproj.purebbs.post.PostViewModel
 
 
-class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryItemViewHolder>(CATEGORY_COMPARATOR) {
+class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryItemViewHolder>(CATEGORY_COMPARATOR) {
 
     lateinit var viewModel: ConfigViewModel
     lateinit var lifecycleOwner: LifecycleOwner
 
     override fun onCurrentListChanged(
-        previousList: MutableList<Config.Category>,
-        currentList: MutableList<Config.Category>
+        previousList: MutableList<Category>,
+        currentList: MutableList<Category>
     ) {
         Log.d("PureBBS", "CategoryAdapter onCurrentListChanged: $previousList")
         Log.d("PureBBS", "CategoryAdapter onCurrentListChanged: $currentList")
@@ -60,25 +60,25 @@ class CategoryAdapter : ListAdapter<Config.Category, CategoryAdapter.CategoryIte
         init {
             Log.d("PureBBS", "CategoryAdapter onCreateViewHolder init")
         }
-        fun bind(item: Config.Category, viewModel:ConfigViewModel) {
+        fun bind(item: Category, viewModel:ConfigViewModel) {
             binding.viewModel = viewModel
             binding.item = item
             binding.executePendingBindings() //
         }
     }
     companion object {
-        private val CATEGORY_COMPARATOR = object : DiffUtil.ItemCallback<Config.Category>() {
-            override fun areItemsTheSame(oldItem: Config.Category, newItem: Config.Category): Boolean =
+        private val CATEGORY_COMPARATOR = object : DiffUtil.ItemCallback<Category>() {
+            override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean =
                 oldItem.idStr == newItem.idStr
 
-            override fun areContentsTheSame(oldItem: Config.Category, newItem: Config.Category): Boolean =
+            override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean =
                 oldItem == newItem
         }
     }
 }
 
 @BindingAdapter("app:selectedCategory")
-fun selectedCategory(view: TextView, item: Config.Category?) {
+fun selectedCategory(view: TextView, item: Category?) {
     Log.d("PureBBS", "<selectedCategory> item.toString: ${item?.toString()}")
 
     if (item != null) {

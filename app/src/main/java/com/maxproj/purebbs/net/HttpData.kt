@@ -1,17 +1,16 @@
 package com.maxproj.purebbs.net
 
-import com.google.gson.annotations.SerializedName
-import com.maxproj.purebbs.config.Config
+import com.maxproj.purebbs.config.Category
 import com.maxproj.purebbs.detail.Detail
 import com.maxproj.purebbs.post.Post
 
 class HttpData {
 
     data class DetailListQuery(
-        val query:Category?,
+        val query:PostID?,
         val options:Options
     ){
-        data class Category(val category:String)
+        data class PostID(val postId:String)
 
         data class Options(
             val offset:Int,
@@ -42,6 +41,6 @@ class HttpData {
     }
     data class PostListRet(val code:Int, val message:String, val data:List<Post>, val totalDocs:Int)
 
-    data class CategoryObject(val category: List<Config.Category>)
+    data class CategoryObject(val category: List<Category>)
     data class CategoryListRet(val code:Int, val message:String, val data:CategoryObject, val totalDocs:Int)
 }
