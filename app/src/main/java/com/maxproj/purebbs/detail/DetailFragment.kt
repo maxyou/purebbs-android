@@ -21,8 +21,10 @@ import kotlinx.android.synthetic.main.detail_fragment.*
 
 class DetailFragment : Fragment() {
 
+    lateinit var postId:String
+
     private val viewModel by lazy {
-        ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api))
+        ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api, postId))
             .get(DetailViewModel::class.java)
     }
 
@@ -31,16 +33,20 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.d("PureBBS","<detail> onCreateView")
+
+        val safeArgs: DetailFragmentArgs by navArgs()
+        postId = safeArgs.postId
+
         val binding: DetailFragmentBinding = bindingViewModelInit()
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("PureBBS","<detail> onResume")
-        val safeArgs: DetailFragmentArgs by navArgs()
-        viewModel.changePostId(safeArgs.postId)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        Log.d("PureBBS","<detail> onResume")
+//        val safeArgs: DetailFragmentArgs by navArgs()
+//        viewModel.changePostId(safeArgs.postId)
+//    }
 
     private fun bindingViewModelInit(): DetailFragmentBinding {
 

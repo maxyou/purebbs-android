@@ -14,7 +14,7 @@ import com.maxproj.purebbs.detail.DetailAdapter
 import com.maxproj.purebbs.detail.DetailRepository
 import com.maxproj.purebbs.detail.DetailViewModel
 
-class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() {
+class DetailViewModel(application: Application, httpApi: HttpApi, postId: String) : ViewModel() {
 
     var postId:String? = null
     private var detailRepository: DetailRepository
@@ -23,21 +23,21 @@ class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() 
     init {
         Log.d("PureBBS","<detail> DetailViewModel init{}")
         val detailDao = MyRoomDatabase.getDatabase(application, viewModelScope).detailDao()
-        detailRepository = DetailRepository(viewModelScope, detailDao, httpApi)
+        detailRepository = DetailRepository(viewModelScope, detailDao, httpApi, postId)
         detailList = detailRepository.detailList
     }
 
     var detailAdapter: DetailAdapter = DetailAdapter()
 
-    fun changePostId(postId:String){
-        detailRepository.changePostId(postId)
-    }
+//    fun changePostId(postId:String){
+//        detailRepository.changePostId(postId)
+//    }
 }
 
-class DetailViewModelFactory (private val application: Application, private val httpApi: HttpApi) : ViewModelProvider.Factory{
+class DetailViewModelFactory (private val application: Application, private val httpApi: HttpApi, private val postId: String) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(application, httpApi) as T
+            return DetailViewModel(application, httpApi, postId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

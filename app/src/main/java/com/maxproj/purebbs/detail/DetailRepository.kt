@@ -19,13 +19,12 @@ import retrofit2.HttpException
 class DetailRepository (
     private val viewModelScope: CoroutineScope,
     private val detailDao: DetailDao,
-    private val httpApi: HttpApi
+    private val httpApi: HttpApi,
+    private val postId: String
 ) {
     companion object {
         private const val DATABASE_PAGE_SIZE = 10
     }
-
-    var postId:String? = null
 
     val detailList: LiveData<PagedList<Detail>>?
         get() {
@@ -78,25 +77,30 @@ class DetailRepository (
             val data = httpGetMore()
             Log.d("PureBBS", "<detail> after get more")
             if(data != null){
-                Log.d("PureBBS", "<detail> detailDao.insertList():${data.data}")
+                Log.d("PureBBS", "<detail> detailBoundaryGetMore.insertList():${data.data}")
                 detailDao.insertList(data.data)
-                Log.d("PureBBS", "<detail> detailDao.insertList() end")
+                Log.d("PureBBS", "<detail> detailBoundaryGetMore.insertList() end")
             }
         }
     }
-
-    fun changePostId(postId:String){
-        Log.d("PureBBS","<detail> DetailRepository changePostId()")
-        this.postId = postId
-        viewModelScope.launch(Dispatchers.IO) {
-            if(detailDao.getDetailCount() == 0){
-                val data = httpGetMore()
-                if(data != null){
-                    detailDao.insertList(data.data)
-                }
-            }else{
-                detailDao.deleteAllDetail()
-            }
-        }
-    }
+//
+//    fun changePostId(postId:String){
+//        Log.d("PureBBS","<detail> DetailRepository changePostId()")
+//        this.postId = postId
+//        viewModelScope.launch(Dispatchers.IO) {
+//            if(detailDao.getDetailCount() == 0){
+//                val data = httpGetMore()
+//                Log.d("PureBBS", "<detail> changePostId.insertList():${data?.data} --- before null check")
+//                if(data != null){
+//                    Log.d("PureBBS", "<detail> changePostId.insertList():${data.data}")
+//                    detailDao.insertList(data.data)
+//                    Log.d("PureBBS", "<detail> changePostId.insertList() end")
+//                }
+//            }else{
+//                Log.d("PureBBS", "<detail> changePostId.deleteAllDetail() end")
+//                detailDao.deleteAllDetail()
+//                Log.d("PureBBS", "<detail> changePostId.deleteAllDetail() end")
+//            }
+//        }
+//    }
 }

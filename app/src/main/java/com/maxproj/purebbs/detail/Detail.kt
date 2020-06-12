@@ -16,7 +16,7 @@ data class Detail (
     val postId:String,
     val avatarFileName:String?,
     val anonymous:Boolean = false,
-    val source:String = "register",
+    val source:String? = "register",
     val oauth: Oauth?,
 //    val title:String? = "no title",
     val content:String? = "no content",

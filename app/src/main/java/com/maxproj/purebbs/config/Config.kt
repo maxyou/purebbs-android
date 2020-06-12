@@ -26,16 +26,12 @@ object Config {
 //    var categoryCurrent:Category? = null
 
     fun calcAvatarPath(
-        source: String,
+        source: String?,
         avatarFileName: String?,
         oauth_avatarUrl: String?,
         anonymous: Boolean,
         isMyself: Boolean
     ): String {
-
-        fun aa(base:URL, path:String, file:String):String{
-            return URL(base, path+file).toString()
-        }
 
         if (anonymous) {
             if (isMyself) {
@@ -48,7 +44,7 @@ object Config {
         } else {
             if (source == "oauth") {
                 return oauth_avatarUrl!!
-            } else {//暂时认为只有 oauth 及 register 两类
+            } else {//暂时认为只有 oauth 及 register 两类，null缺省是register
                 if (avatarFileName != null) {
                     return URL(BASE_URL, PATH_AVATAR + avatarFileName).toString()
 //                    return PATH_AVATAR + avatarFileName
