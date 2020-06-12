@@ -19,12 +19,13 @@ import retrofit2.HttpException
 class DetailRepository (
     private val viewModelScope: CoroutineScope,
     private val detailDao: DetailDao,
-    private val httpApi: HttpApi,
-    private val postId: String
+    private val httpApi: HttpApi
 ) {
     companion object {
         private const val DATABASE_PAGE_SIZE = 10
     }
+
+    var postId:String? = null
 
     init {
         Log.d("PureBBS","<detail> DetailRepository init{}")
@@ -77,6 +78,11 @@ class DetailRepository (
     }
 
     private fun detailBoundaryGetMore(){
+
+        if(postId == null){
+            return
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
             Log.d("PureBBS", "<detail> before get more")
             val data = httpGetMore()
@@ -88,10 +94,50 @@ class DetailRepository (
             }
         }
     }
-//
-//    fun changePostId(postId:String){
-//        Log.d("PureBBS","<detail> DetailRepository changePostId()")
-//        this.postId = postId
+
+    fun changePostId(postId:String){
+
+        Log.d("PureBBS","<detail> DetailRepository.changePostId(), this.postId:${this.postId}, new postId:{$postId}")
+
+        /**
+         * 如果新postId等于旧postID，无需任何操作
+         * 如果旧postID为null，需要清空数据库
+         * 如果新旧postId不等，需要清空数据库
+         */
+
+        when{
+            this.postId == postId -> {
+                Log.d("PureBBS", "<detail> changePostId() when this.postId == postId")
+            }
+            this.postId == null -> {
+                Log.d("PureBBS", "<detail> changePostId() when this.postId == null")
+                this.postId = postId
+            }
+            this.postId != postId -> {
+
+                Log.d("PureBBS", "<detail> changePostId() when this.postId != postId")
+                this.postId = postId
+
+                viewModelScope.launch(Dispatchers.IO) {
+
+                    Log.d("PureBBS", "<detail> changePostId() detailDao.deleteAllDetail")
+                    detailDao.deleteAllDetail()
+
+                    //能省略下面的驱动操作吗？
+//                    val data = httpGetMore()
+//                    Log.d("PureBBS", "<detail> changePostId.insertList():${data?.data} --- before null check")
+//                    if(data != null){
+//                        Log.d("PureBBS", "<detail> changePostId.insertList():${data.data}")
+//                        detailDao.insertList(data.data)
+//                        Log.d("PureBBS", "<detail> changePostId.insertList() end")
+//                    }
+                }
+            }
+            else ->{
+                Log.d("PureBBS", "<detail> changePostId() when else")
+            }
+        }
+
 //        viewModelScope.launch(Dispatchers.IO) {
 //            if(detailDao.getDetailCount() == 0){
 //                val data = httpGetMore()
@@ -107,5 +153,5 @@ class DetailRepository (
 //                Log.d("PureBBS", "<detail> changePostId.deleteAllDetail() end")
 //            }
 //        }
-//    }
+    }
 }

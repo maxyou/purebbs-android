@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
+import com.maxproj.purebbs.config.Config.DATABASE_NAME
 import com.maxproj.purebbs.detail.Detail
 import com.maxproj.purebbs.detail.DetailDao
 import com.maxproj.purebbs.post.Post
@@ -60,7 +61,7 @@ abstract class MyRoomDatabase : RoomDatabase(){
     abstract fun configDao(): ConfigDao //include config and category
 
     companion object {
-        private val DATABASE_NAME = "purebbs_database9"
+
         @Volatile
         private var INSTANCE: MyRoomDatabase? = null
 

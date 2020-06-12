@@ -25,6 +25,8 @@ object Config {
 //    var categories:List<Category>? = null
 //    var categoryCurrent:Category? = null
 
+    val DATABASE_NAME:String = "purebbs_database11"
+
     fun calcAvatarPath(
         source: String?,
         avatarFileName: String?,

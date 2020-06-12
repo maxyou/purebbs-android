@@ -5,27 +5,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.maxproj.purebbs.R
-import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.DetailFragmentBinding
 import com.maxproj.purebbs.net.HttpService
-import com.maxproj.purebbs.detail.DetailViewModel
-import com.maxproj.purebbs.detail.DetailViewModelFactory
-import kotlinx.android.synthetic.main.detail_fragment.*
 
 
 class DetailFragment : Fragment() {
 
-    lateinit var postId:String
+//    lateinit var postId:String
 
     private val viewModel by lazy {
         Log.d("PureBBS","<detail> viewModel by lazy")
-        ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api, postId))
+        ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(DetailViewModel::class.java)
     }
 
@@ -35,19 +29,19 @@ class DetailFragment : Fragment() {
     ): View? {
         Log.d("PureBBS","<detail> onCreateView")
 
-        val safeArgs: DetailFragmentArgs by navArgs()
-        postId = safeArgs.postId
+//        val safeArgs: DetailFragmentArgs by navArgs()
+//        postId = safeArgs.postId
 
         val binding: DetailFragmentBinding = bindingViewModelInit()
         return binding.root
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        Log.d("PureBBS","<detail> onResume")
-//        val safeArgs: DetailFragmentArgs by navArgs()
-//        viewModel.changePostId(safeArgs.postId)
-//    }
+    override fun onResume() {
+        super.onResume()
+        Log.d("PureBBS","<detail> onResume")
+        val safeArgs: DetailFragmentArgs by navArgs()
+        viewModel.changePostId(safeArgs.postId)
+    }
 
     private fun bindingViewModelInit(): DetailFragmentBinding {
 

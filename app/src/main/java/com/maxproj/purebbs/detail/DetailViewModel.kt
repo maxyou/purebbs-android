@@ -14,7 +14,7 @@ import com.maxproj.purebbs.detail.DetailAdapter
 import com.maxproj.purebbs.detail.DetailRepository
 import com.maxproj.purebbs.detail.DetailViewModel
 
-class DetailViewModel(application: Application, httpApi: HttpApi, postId: String) : ViewModel() {
+class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() {
 
     private var detailRepository: DetailRepository
     val detailList: LiveData<PagedList<Detail>>?
@@ -22,7 +22,7 @@ class DetailViewModel(application: Application, httpApi: HttpApi, postId: String
     init {
         Log.d("PureBBS","<detail> DetailViewModel init{} 1")
         val detailDao = MyRoomDatabase.getDatabase(application, viewModelScope).detailDao()
-        detailRepository = DetailRepository(viewModelScope, detailDao, httpApi, postId)
+        detailRepository = DetailRepository(viewModelScope, detailDao, httpApi)
         Log.d("PureBBS","<detail> DetailViewModel init{} 2")
         detailList = detailRepository.detailList
         Log.d("PureBBS","<detail> DetailViewModel init{} 3")
@@ -30,15 +30,17 @@ class DetailViewModel(application: Application, httpApi: HttpApi, postId: String
 
     var detailAdapter: DetailAdapter = DetailAdapter()
 
-//    fun changePostId(postId:String){
-//        detailRepository.changePostId(postId)
-//    }
+    var postId:String? = null
+    fun changePostId(postId:String){
+        this.postId = postId
+        detailRepository.changePostId(postId)
+    }
 }
 
-class DetailViewModelFactory (private val application: Application, private val httpApi: HttpApi, private val postId: String) : ViewModelProvider.Factory{
+class DetailViewModelFactory (private val application: Application, private val httpApi: HttpApi) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(application, httpApi, postId) as T
+            return DetailViewModel(application, httpApi) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
