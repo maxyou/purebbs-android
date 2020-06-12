@@ -24,6 +24,7 @@ class DetailFragment : Fragment() {
     lateinit var postId:String
 
     private val viewModel by lazy {
+        Log.d("PureBBS","<detail> viewModel by lazy")
         ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api, postId))
             .get(DetailViewModel::class.java)
     }
@@ -59,6 +60,7 @@ class DetailFragment : Fragment() {
 
         binding.detailRecyclerview.adapter = viewModel.detailAdapter
 
+        Log.d("PureBBS","<detail> detailList?.observe")
         viewModel.detailList?.observe(viewLifecycleOwner, Observer {
             Log.d("PureBBS","<detail> DetailFragment viewModel.detailAdapter.submitList:$it")
             viewModel.detailAdapter.submitList(it)

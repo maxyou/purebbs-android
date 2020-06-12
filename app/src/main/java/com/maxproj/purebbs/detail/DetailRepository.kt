@@ -26,8 +26,13 @@ class DetailRepository (
         private const val DATABASE_PAGE_SIZE = 10
     }
 
+    init {
+        Log.d("PureBBS","<detail> DetailRepository init{}")
+    }
     val detailList: LiveData<PagedList<Detail>>?
         get() {
+            Log.d("PureBBS","<detail> DetailRepository detailList get()")
+
             val dataSourceFactory = detailDao.getDetailDataSource()
 
             val boundaryCallback = DetailBoundaryCallback(::detailBoundaryGetMore)

@@ -16,7 +16,9 @@ class DetailBoundaryCallback(
     companion object{
         private const val NETWORK_PAGE_SIZE = 20
     }
-
+    init {
+        Log.d("PureBBS","<detail> DetailBoundaryCallback init{}")
+    }
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
     val networkErrors: LiveData<String>

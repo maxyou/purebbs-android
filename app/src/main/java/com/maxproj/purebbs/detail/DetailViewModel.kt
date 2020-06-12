@@ -16,15 +16,16 @@ import com.maxproj.purebbs.detail.DetailViewModel
 
 class DetailViewModel(application: Application, httpApi: HttpApi, postId: String) : ViewModel() {
 
-    var postId:String? = null
     private var detailRepository: DetailRepository
     val detailList: LiveData<PagedList<Detail>>?
 
     init {
-        Log.d("PureBBS","<detail> DetailViewModel init{}")
+        Log.d("PureBBS","<detail> DetailViewModel init{} 1")
         val detailDao = MyRoomDatabase.getDatabase(application, viewModelScope).detailDao()
         detailRepository = DetailRepository(viewModelScope, detailDao, httpApi, postId)
+        Log.d("PureBBS","<detail> DetailViewModel init{} 2")
         detailList = detailRepository.detailList
+        Log.d("PureBBS","<detail> DetailViewModel init{} 3")
     }
 
     var detailAdapter: DetailAdapter = DetailAdapter()
