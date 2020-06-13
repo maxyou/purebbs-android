@@ -124,13 +124,13 @@ class DetailRepository (
                     detailDao.deleteAllDetail()
 
                     //能省略下面的驱动操作吗？
-//                    val data = httpGetMore()
-//                    Log.d("PureBBS", "<detail> changePostId.insertList():${data?.data} --- before null check")
-//                    if(data != null){
-//                        Log.d("PureBBS", "<detail> changePostId.insertList():${data.data}")
-//                        detailDao.insertList(data.data)
-//                        Log.d("PureBBS", "<detail> changePostId.insertList() end")
-//                    }
+                    val data = httpGetMore()
+                    Log.d("PureBBS", "<detail> changePostId.insertList():${data?.data} --- before null check")
+                    if(data != null){
+                        Log.d("PureBBS", "<detail> changePostId.insertList():${data.data}")
+                        detailDao.insertList(data.data)
+                        Log.d("PureBBS", "<detail> changePostId.insertList() end")
+                    }
                 }
             }
             else ->{

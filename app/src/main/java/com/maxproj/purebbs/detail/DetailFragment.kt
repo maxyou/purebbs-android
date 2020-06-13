@@ -36,8 +36,8 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         Log.d("PureBBS","<detail> onResume")
         val safeArgs: DetailFragmentArgs by navArgs()
         viewModel.changePostId(safeArgs.postId)
