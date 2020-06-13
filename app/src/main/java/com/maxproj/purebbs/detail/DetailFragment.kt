@@ -55,9 +55,24 @@ class DetailFragment : Fragment() {
         binding.detailRecyclerview.adapter = viewModel.detailAdapter
 
         Log.d("PureBBS","<detail> detailList?.observe")
-        viewModel.detailList?.observe(viewLifecycleOwner, Observer {
+        viewModel.detailList?.observe(viewLifecycleOwner, Observer aa@{
             Log.d("PureBBS","<detail> DetailFragment viewModel.detailAdapter.submitList:$it")
-            viewModel.detailAdapter.submitList(it)
+//            viewModel.detailAdapter.submitList(it)
+
+            if(it != null){
+                if(it.size > 0){
+                    Log.d("PureBBS", "<detail> DetailFragment submit it.get(0):${it.get(0)}")
+                    val item:Detail = it.get(0) as Detail
+                    val itemPostId = item.postId
+                    Log.d("PureBBS", "<detail> DetailFragment submit it.get(0).postId:$itemPostId")
+                    Log.d("PureBBS", "<detail> DetailFragment submit viewModel.postId:${viewModel.postId}")
+                    if(item.postId == viewModel.postId){
+                        viewModel.detailAdapter.submitList(it)
+                        return@aa
+                    }
+                }
+            }
+            viewModel.detailAdapter.submitList(null) //null
         })
         return binding
     }
