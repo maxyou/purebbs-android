@@ -1,5 +1,6 @@
 package com.maxproj.purebbs.config
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Entity
@@ -16,11 +17,24 @@ object Config {
     val CATEGORY_ALL:String = "category_all"
 //    var categoryCurrent:String = Config.CATEGORY_ALL
 
+    var categoryLiveStr = Config.CATEGORY_ALL
+    fun updateAndCompareCategoryLiveStr(newStr:String):Boolean{
+        if(newStr == categoryLiveStr){
+            return false
+        }else{
+            categoryLiveStr = newStr
+            return true
+        }
+    }
     val _categoryCurrentLive: MutableLiveData<String> by lazy {
+        Log.d("PureBBS", "<category refresh> category by lazy")
         MutableLiveData<String>(Config.CATEGORY_ALL)
     }
     val categoryCurrentLive: LiveData<String>
-        get() = _categoryCurrentLive
+        get(){
+            Log.d("PureBBS", "<category refresh> category get()")
+            return _categoryCurrentLive
+        }
 
 //    var categories:List<Category>? = null
 //    var categoryCurrent:Category? = null

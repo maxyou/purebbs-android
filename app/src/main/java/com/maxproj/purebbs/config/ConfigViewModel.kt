@@ -28,7 +28,7 @@ class ConfigViewModel (application: Application, httpApi: HttpApi) : AndroidView
         configRepository.updateCategoryList()
     }
     fun updateCategoryCurrent(view: View, idStr:String){
-        Log.d("PureBBS", "new category current: $idStr")
+        Log.d("PureBBS", "<category refresh> category current, old:${Config._categoryCurrentLive.value} new: $idStr")
         Config._categoryCurrentLive.value = idStr
 
         mDrawerLayout.closeDrawers()
