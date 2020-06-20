@@ -19,6 +19,9 @@ class PostRepository(
     private val postDao: PostDao,
     private val httpApi: HttpApi
 ) {
+    init {
+        Log.d("PureBBS", "<lifecycle> PostRepository init")
+    }
     companion object {
         private const val DATABASE_PAGE_SIZE = 10
     }

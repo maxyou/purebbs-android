@@ -20,11 +20,22 @@ class PostFragment : Fragment(){
             .get(PostViewModel::class.java)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("PureBBS", "<lifecycle> PostFragment onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("PureBBS", "<lifecycle> PostFragment onDestroy")
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("PureBBS", "<lifecycle> PostFragment onCreateView")
+
         setHasOptionsMenu(true)
 
         val binding: PostFragmentBinding = bindingViewModelInit()

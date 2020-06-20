@@ -28,7 +28,7 @@ class DetailRepository (
     var postId:String? = null
 
     init {
-        Log.d("PureBBS","<detail> DetailRepository init{}")
+        Log.d("PureBBS","<lifecycle> DetailRepository init{}")
     }
     val detailList: LiveData<PagedList<Detail>>?
         get() {

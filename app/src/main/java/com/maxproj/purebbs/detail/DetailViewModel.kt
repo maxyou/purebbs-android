@@ -20,12 +20,10 @@ class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() 
     val detailList: LiveData<PagedList<Detail>>?
 
     init {
-        Log.d("PureBBS","<detail> DetailViewModel init{} 1")
+        Log.d("PureBBS", "<lifecycle> DetailViewModel init")
         val detailDao = MyRoomDatabase.getDatabase(application, viewModelScope).detailDao()
         detailRepository = DetailRepository(viewModelScope, detailDao, httpApi)
-        Log.d("PureBBS","<detail> DetailViewModel init{} 2")
         detailList = detailRepository.detailList
-        Log.d("PureBBS","<detail> DetailViewModel init{} 3")
     }
 
     var detailAdapter: DetailAdapter = DetailAdapter()

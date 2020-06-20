@@ -1,5 +1,6 @@
 package com.maxproj.purebbs.post
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
@@ -13,6 +14,7 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
     val postList:LiveData<PagedList<Post>>?
 
     init {
+        Log.d("PureBBS", "<lifecycle> PostViewModel init")
         val postDao = MyRoomDatabase.getDatabase(application, viewModelScope).postDao()
         postRepository = PostRepository(viewModelScope, postDao, httpApi)
         postList = postRepository.postList

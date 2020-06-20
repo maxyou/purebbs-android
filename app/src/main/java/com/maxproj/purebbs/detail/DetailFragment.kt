@@ -22,12 +22,20 @@ class DetailFragment : Fragment() {
         ViewModelProvider(this.requireActivity(), DetailViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(DetailViewModel::class.java)
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("PureBBS", "<lifecycle> DetailFragment onDestroyView")
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("PureBBS", "<lifecycle> DetailFragment onDestroy")
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("PureBBS","<detail> onCreateView")
+        Log.d("PureBBS", "<lifecycle> DetailFragment onCreateView")
 
 //        val safeArgs: DetailFragmentArgs by navArgs()
 //        postId = safeArgs.postId
