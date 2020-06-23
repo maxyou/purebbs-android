@@ -21,6 +21,9 @@ class PostRepository(
 ) {
     init {
         Log.d("PureBBS", "<lifecycle> PostRepository init")
+        viewModelScope.launch(Dispatchers.IO){
+            postDao.deleteAllPost()
+        }
     }
     companion object {
         private const val DATABASE_PAGE_SIZE = 10

@@ -29,6 +29,9 @@ class DetailRepository (
 
     init {
         Log.d("PureBBS","<lifecycle> DetailRepository init{}")
+        viewModelScope.launch(Dispatchers.IO){
+            detailDao.deleteAllDetail()
+        }
     }
     val detailList: LiveData<PagedList<Detail>>?
         get() {

@@ -18,7 +18,7 @@ class PostFragment : Fragment(){
 
     private val viewModel by lazy {
 //        var activity = activity as AppCompatActivity
-        ViewModelProvider(this.requireActivity(), PostViewModelFactory(this.requireActivity().application, HttpService.api))
+        ViewModelProvider(this, PostViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(PostViewModel::class.java)
     }
 
