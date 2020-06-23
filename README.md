@@ -13,12 +13,8 @@ used:
 - Retrofit+OkHttp
 - KTX
 
-todo:
-
-frontend repo:
-- [frontend](https://github.com/maxyou/purebbs)
-
-server repo:
+repos:
+- [purebbs](https://github.com/maxyou/purebbs)
 - [server](https://github.com/maxyou/purebbs-server)
 
 ## Screen
