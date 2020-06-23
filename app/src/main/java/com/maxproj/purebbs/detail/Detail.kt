@@ -35,8 +35,3 @@ data class Detail (
 //    val stickTop:Boolean? = false
 //    val extend: Extend
 )
-
-data class DetailExt(
-    val post: Post?,
-    val detail:Detail?
-)

@@ -31,6 +31,10 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
         sharedViewModel.post = item
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest(postId = item.postId))
     }
+    fun gotoContent(view: View, item:Post){
+        sharedViewModel.post = item
+        Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToContentDest(postId = item.postId))
+    }
 
 }
 

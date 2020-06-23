@@ -4,5 +4,6 @@
     <string name="post_fragment">PostFragment</string>
     <string name="detail_fragment">DetailFragment</string>
     <string name="refresh">refresh</string>
+    <string name="content_fragment">ContentFragment</string>
 
 </resources>

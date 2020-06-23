@@ -12,8 +12,10 @@
         tools:layout="@layout/post_fragment">
         <action
             android:id="@+id/action_post_dest_to_detail_dest"
-
             app:destination="@id/detail_dest" />
+        <action
+            android:id="@+id/action_post_dest_to_content_dest"
+            app:destination="@id/content_dest" />
     </fragment>
 
 
@@ -22,6 +24,16 @@
         android:label="@string/detail_fragment"
         android:name="com.maxproj.purebbs.detail.DetailFragment"
         tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="postId"
+            app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/content_dest"
+        android:label="@string/content_fragment"
+        android:name="com.maxproj.purebbs.content.ContentFragment"
+        tools:layout="@layout/content_fragment">
         <argument
             android:name="postId"
             app:argType="string"/>
