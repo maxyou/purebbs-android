@@ -36,9 +36,6 @@ object Config {
             return _categoryCurrentLive
         }
 
-//    var categories:List<Category>? = null
-//    var categoryCurrent:Category? = null
-
     val DATABASE_NAME:String = "purebbs_database21"
 
     fun calcAvatarPath(

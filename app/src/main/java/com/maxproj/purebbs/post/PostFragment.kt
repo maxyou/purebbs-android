@@ -19,22 +19,12 @@ import com.maxproj.purebbs.net.HttpService
 class PostFragment : Fragment(){
 
     private val viewModel by lazy {
-//        var activity = activity as AppCompatActivity
         ViewModelProvider(this, PostViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(PostViewModel::class.java)
     }
 
     private val sharedViewModel:SharedViewModel by activityViewModels()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("PureBBS", "<lifecycle> PostFragment onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("PureBBS", "<lifecycle> PostFragment onDestroy")
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

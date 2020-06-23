@@ -59,23 +59,10 @@
             android:onClick="@{(v)->viewModel.gotoDetail(v, item)}"
             android:text="@{Integer.toString(item.commentNum)}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/gotoDetail"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/gotoDetail"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_margin="2dp"
-            android:background="@color/AntiqueWhite"
-            android:gravity="center"
-            android:text="->"
-            android:textSize="12sp"
-            android:onClick="@{(v)->viewModel.gotoDetail(v, item)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/commentNum"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

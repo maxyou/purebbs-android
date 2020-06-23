@@ -17,8 +17,6 @@ import com.maxproj.purebbs.net.HttpService
 
 class DetailFragment : Fragment() {
 
-//    lateinit var postId:String
-
     private val viewModel by lazy {
         Log.d("PureBBS","<detail> viewModel by lazy")
         ViewModelProvider(this, DetailViewModelFactory(this.requireActivity().application, HttpService.api))
@@ -27,15 +25,6 @@ class DetailFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("PureBBS", "<lifecycle> DetailFragment onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("PureBBS", "<lifecycle> DetailFragment onDestroy")
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
