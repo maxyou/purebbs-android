@@ -6,10 +6,11 @@ import androidx.lifecycle.*
 import androidx.navigation.Navigation
 import androidx.paging.PagedList
 import com.maxproj.purebbs.config.MyRoomDatabase
+import com.maxproj.purebbs.config.SharedViewModel
 import com.maxproj.purebbs.net.HttpApi
 
 class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewModel(application) {
-
+    lateinit var sharedViewModel: SharedViewModel
     private var postRepository:PostRepository
     val postList:LiveData<PagedList<Post>>?
 
@@ -27,6 +28,7 @@ class PostViewModel(application: Application, httpApi: HttpApi) : AndroidViewMod
     }
 
     fun gotoDetail(view: View, item:Post){
+        sharedViewModel.post = item
         Navigation.findNavController(view).navigate(PostFragmentDirections.actionPostDestToDetailDest(postId = item.postId))
     }
 

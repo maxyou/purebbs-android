@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import com.maxproj.purebbs.config.MyRoomDatabase
+import com.maxproj.purebbs.config.SharedViewModel
 import com.maxproj.purebbs.net.HttpApi
 import com.maxproj.purebbs.detail.Detail
 import com.maxproj.purebbs.detail.DetailAdapter
@@ -15,7 +16,7 @@ import com.maxproj.purebbs.detail.DetailRepository
 import com.maxproj.purebbs.detail.DetailViewModel
 
 class DetailViewModel(application: Application, httpApi: HttpApi) : ViewModel() {
-
+//    lateinit var sharedViewModel: SharedViewModel
     private var detailRepository: DetailRepository
     val detailList: LiveData<PagedList<Detail>>?
 

@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.Gson
 import com.maxproj.purebbs.config.LikeUser
 import com.maxproj.purebbs.config.Oauth
+import com.maxproj.purebbs.post.Post
 
 
 @Entity(tableName = "detail_table")
@@ -33,4 +34,9 @@ data class Detail (
 //    val allUpdated: String?,
 //    val stickTop:Boolean? = false
 //    val extend: Extend
+)
+
+data class DetailExt(
+    val post: Post?,
+    val detail:Detail?
 )

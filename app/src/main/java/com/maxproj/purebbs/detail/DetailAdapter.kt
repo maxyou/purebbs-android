@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.DetailItemViewBinding
-import com.maxproj.purebbs.detail.Detail
-import com.maxproj.purebbs.detail.DetailAdapter
-import com.maxproj.purebbs.detail.DetailViewModel
-import com.maxproj.purebbs.post.Post
+
 
 class DetailAdapter : PagedListAdapter<Detail, DetailAdapter.DetailItemViewHolder>(REPO_COMPARATOR) {
 

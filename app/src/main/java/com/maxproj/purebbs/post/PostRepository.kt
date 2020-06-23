@@ -57,7 +57,7 @@ class PostRepository(
                 offset = postCount,
                 limit = 10,
                 sort = HttpData.PostListQuery.Options.Sort(allUpdated = -1),
-                select = "source oauth title postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
+                select = "source oauth title content postId author authorId commentNum likeUser updated created avatarFileName lastReplyId lastReplyName lastReplyTime allUpdated stickTop category anonymous extend"
             )
         )
         val queryStr = Gson().toJson(query)

@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.config.Config.categoryCurrentLive
 import com.maxproj.purebbs.config.Config.updateAndCompareCategoryLiveStr
+import com.maxproj.purebbs.config.SharedViewModel
 import com.maxproj.purebbs.databinding.PostFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
@@ -21,6 +23,8 @@ class PostFragment : Fragment(){
         ViewModelProvider(this, PostViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(PostViewModel::class.java)
     }
+
+    private val sharedViewModel:SharedViewModel by activityViewModels()
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -69,6 +73,9 @@ class PostFragment : Fragment(){
                 viewModel.changeCategory(it)
             }
         })
+
+        viewModel.sharedViewModel = sharedViewModel
+
         return binding
     }
 

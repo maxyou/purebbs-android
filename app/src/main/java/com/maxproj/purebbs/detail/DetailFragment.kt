@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.maxproj.purebbs.config.SharedViewModel
 import com.maxproj.purebbs.databinding.DetailFragmentBinding
 import com.maxproj.purebbs.net.HttpService
 
@@ -22,6 +24,9 @@ class DetailFragment : Fragment() {
         ViewModelProvider(this, DetailViewModelFactory(this.requireActivity().application, HttpService.api))
             .get(DetailViewModel::class.java)
     }
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d("PureBBS", "<lifecycle> DetailFragment onDestroyView")
@@ -63,10 +68,16 @@ class DetailFragment : Fragment() {
         binding.detailRecyclerview.adapter = viewModel.detailAdapter
 
         Log.d("PureBBS","<detail> detailList?.observe")
-        viewModel.detailList?.observe(viewLifecycleOwner, Observer aa@{
+        viewModel.detailList?.observe(viewLifecycleOwner, Observer {
+
+            Log.d("PureBBS","<detail> DetailFragment viewModel.sharedViewModel:${sharedViewModel.post}")
+
             Log.d("PureBBS","<detail> DetailFragment viewModel.detailAdapter.submitList:$it")
             viewModel.detailAdapter.submitList(it)
         })
+
+//        viewModel.sharedViewModel = sharedViewModel
+
         return binding
     }
 }
