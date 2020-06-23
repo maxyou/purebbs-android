@@ -14,7 +14,7 @@ import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.PostItemViewBinding
 
 
-class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_COMPARATOR) {
+class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(POST_COMPARATOR) {
 
     lateinit var viewModel: PostViewModel
     lateinit var lifecycleOwner: LifecycleOwner
@@ -62,7 +62,7 @@ class PostAdapter : PagedListAdapter<Post, PostAdapter.PostItemViewHolder>(REPO_
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
+        private val POST_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
                 oldItem._id == newItem._id
 

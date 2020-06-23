@@ -14,7 +14,7 @@ import com.maxproj.purebbs.config.Config
 import com.maxproj.purebbs.databinding.DetailItemViewBinding
 
 
-class DetailAdapter : PagedListAdapter<Detail, DetailAdapter.DetailItemViewHolder>(REPO_COMPARATOR) {
+class DetailAdapter : PagedListAdapter<Detail, DetailAdapter.DetailItemViewHolder>(DETAIL_COMPARATOR) {
 
     lateinit var viewModel: DetailViewModel
     lateinit var lifecycleOwner: LifecycleOwner
@@ -50,7 +50,7 @@ class DetailAdapter : PagedListAdapter<Detail, DetailAdapter.DetailItemViewHolde
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Detail>() {
+        private val DETAIL_COMPARATOR = object : DiffUtil.ItemCallback<Detail>() {
             override fun areItemsTheSame(oldItem: Detail, newItem: Detail): Boolean =
                 oldItem._id == newItem._id
 
