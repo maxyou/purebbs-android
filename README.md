@@ -21,9 +21,10 @@ frontend repo:
 server repo:
 - [server](https://github.com/maxyou/purebbs-server)
 
+<img src="category.png" width="256" height="455">
 
 ### category:
-![](https://github.com/maxyou/purebbs-android/raw/master/category.png)
+![](https://github.com/maxyou/purebbs-android/raw/master/category.png =100)
 
 ### post list:
 ![](https://github.com/maxyou/purebbs-android/raw/master/post.jpg)
