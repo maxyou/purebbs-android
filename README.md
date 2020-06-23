@@ -21,19 +21,13 @@ frontend repo:
 server repo:
 - [server](https://github.com/maxyou/purebbs-server)
 
-<img src="category.png" width="256" height="455">
+## Screen
 
-### category:
-![](https://github.com/maxyou/purebbs-android/raw/master/category.png =100)
+<img src="category.png" width="256">
+<img src="post.jpg" width="256">
+<img src="content.png" width="256">
+<img src="detail.jpg" width="256">
 
-### post list:
-![](https://github.com/maxyou/purebbs-android/raw/master/post.jpg)
-
-### content:
-![](https://github.com/maxyou/purebbs-android/raw/master/content.png)
-
-### detail comment:
-![](https://github.com/maxyou/purebbs-android/raw/master/detail.jpg)
 
 ## License<br>
 under [MIT License](http://www.opensource.org/licenses/MIT).
