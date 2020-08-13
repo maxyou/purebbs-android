@@ -1,6 +1,9 @@
 package com.maxproj.purebbs.net
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.maxproj.purebbs.config.Config
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -31,6 +34,7 @@ object HttpService {
 //            .sslSocketFactory(co.docy.ourgroups.NetTools.HttpTools.sslContext.getSocketFactory())
             .addNetworkInterceptor(StethoInterceptor())
             .addNetworkInterceptor(interceptor)
+            .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(Config.application)))
             .build()
 
         Retrofit.Builder()

@@ -11,6 +11,8 @@ import java.util.*
 import kotlin.properties.Delegates
 
 object Config {
+    lateinit var application: MyApplication
+
 //    val BASE_URL: URL = URL("http://192.168.31.70:3001")
     val BASE_URL: URL = URL("http://purebbs.com")
     val PATH_AVATAR:String = "user/avatar/"
