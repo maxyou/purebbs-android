@@ -39,6 +39,9 @@
             app:argType="string"/>
     </fragment>
 
-
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.maxproj.purebbs.config.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>
